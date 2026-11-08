@@ -389,3 +389,4 @@ Evaluated across 15 queries covering all 12 KB policy documents plus 3 edge case
 5. **Eval Case 11 Retrieval Miss:** In evaluation query 11 ("When is an outage declared?"), the top similarity was 0.4069, just below the 0.41 threshold. The groundedness guardrail correctly executed a refusal (`status: refused`), which resulted in 0.0 accuracy for that specific case while maintaining 1.0 safety.
 6. **In-Process Memory:** Session chat histories are stored in-memory and do not persist across process restarts.
 7. **Expected Deprecation Warnings:** LangChain emits deprecation warnings regarding `RunnableWithMessageHistory` and `InMemoryChatMessageHistory`; these are expected and preserved per the architectural brief.
+
