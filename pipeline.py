@@ -167,6 +167,7 @@ async def answer(
             masked_question=masked_question,
             resolved_question=resolved_question,
             sources=cached["sources"],
+            rag_context=cached.get("rag_context", []),
             ticket=cached["ticket"],
             grounded=True,
             top_similarity=cached.get("top_similarity"),
@@ -284,6 +285,7 @@ async def answer(
         )
 
     # --- 11. CACHE STORE ---
+    rag_context_list = rag_data.get("context", []) if (rag_data and "context" in rag_data) else []
     if status == "ok":
         cache.put(
             resolved_question,
@@ -291,6 +293,7 @@ async def answer(
                 "answer": final_answer,
                 "intent": final_intent,
                 "sources": final_sources,
+                "rag_context": rag_context_list,
                 "ticket": final_ticket,
                 "top_similarity": top_sim,
                 "approved": approved,
@@ -313,6 +316,7 @@ async def answer(
         masked_question=masked_question,
         resolved_question=resolved_question,
         sources=final_sources,
+        rag_context=rag_context_list,
         ticket=final_ticket,
         grounded=is_grounded,
         top_similarity=top_sim,

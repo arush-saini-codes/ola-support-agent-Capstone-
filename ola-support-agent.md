@@ -1,45 +1,4 @@
-Follow ola-support-agent.md (project root). Rules in Section 2 apply. Stop after Phase 9.
-REPORTING RULE: transcripts are reported only via `type transcripts\<name>.txt`, verbatim. No retyping or excerpts.
-
-PART A — Phase 8 fixes
-1. Budget in-flight check must happen BEFORE each LLM call: MockCrewLLM and MockReviewClient compute the prompt tokens first; if meter.used + prompt_tokens > cap → raise BudgetExceeded WITHOUT making the call or charging it. Charge after a call succeeds. Result: tokens_used can never exceed the cap.
-   Re-run demos/task15_budget.py with the in-flight demo cap = 3000 on the mixed query (so some calls succeed and then the next one is refused). Print: the cap, tokens used at abort (must be <= cap), the call that was refused, and the stage. Also print explicit deltas for crew_llm_calls, review_llm_calls, tool_calls and generation_calls for the pre-flight rejection (all 0).
-2. demos/task16_cache.py must print the before/after table from Section 14.4: for request 1 (miss) and request 2 (hit), the deltas of crew_llm_calls, tool_calls, generation_calls, review_llm_calls, plus tokens_used, latency_ms and cache_hit. Assert all deltas are 0 for the hit and the answer is identical. Then a SEPARATE "Invalidation" section: cache.clear() → ask again → miss, with counters increasing again. Keep the LRU eviction check as its own section. Re-run it.
-
-PART B — PHASE 9: FastAPI + structured logging (Section 18 → Phase 9, Section 15)
-
-1) Add masked_question to PipelineResult (the masked text the pipeline used) so the logger never needs the raw text.
-
-2) api/models.py — exactly Section 15.1 (AskRequest, AskResponse built from PipelineResult incl. tokens_used and cost_inr, AddDocumentRequest with doc_id pattern ^[a-z0-9_]+$ and text min_length 20, AddDocumentResponse). Plus HealthResponse.
-
-3) api/logging_jsonl.py — log_request(record: dict) appends ONE JSON line to logs/requests.jsonl (thread-safe, UTF-8, ensure_ascii=False). Fields exactly per Section 15.3. request_text is ALWAYS PipelineResult.masked_question (or mask_pii(text)[0] for non-pipeline requests such as /add-document). The raw question must never be passed to the logger. Also log WebSocket events: ws_connect, ws_disconnect (with turns_completed).
-
-4) api/main.py — FastAPI with a lifespan that warms the embedder, Chroma client and crew factory once.
-   - GET /health → HealthResponse {"status": "ok", "mock_llm": true}; logged.
-   - POST /ask (async) → await pipeline.answer(...) → AskResponse; one log line.
-   - POST /add-document → chunk with the DEPLOYED strategy, embed, upsert into DEPLOYED_COLLECTION, cache.clear() → AddDocumentResponse; one log line. It updates the vector index only (it does not write to kb/) — say so in the docstring.
-   - WS /ws/chat → exactly Section 15.2: accept; session_id from the query param or a uuid; loop receive_json → pipeline.answer → send_json; catch WebSocketDisconnect AND RuntimeError/ConnectionClosed raised when sending to a closed socket; log ws_disconnect and return without crashing; any other exception → send an error frame and continue. One log line per turn.
-   - Every pipeline call carries the trace_id into the log line and the response.
-
-5) demos/task11_api.py → tee_transcript("task11_api"), using fastapi.testclient.TestClient (no external network):
-   a. GET /health.
-   b. POST /ask "When do service credits expire?" → print the AskResponse JSON.
-   c. POST /add-document with a fabricated doc: doc_id "13_lost_item_recovery", title "Lost Item Recovery Policy", text of 3 sentences (e.g. items left in a cab are logged within 2 hours, held at the city hub for 30 days, and returned for a Rs 99 handling fee). Print the response (chunks_added, cache_cleared). Then POST /ask "How long are lost items held at the city hub?" → must cite 13_lost_item_recovery.
-      CLEANUP: delete that doc's chunks from the collection (collection.delete(where={"doc_id": "13_lost_item_recovery"})), cache.clear(), and print the collection count, which must be back to 50.
-   d. WebSocket client A (session "ws_a"): turn 1 "Check OLA-1027" → receive; turn 2 "What is its resolution SLA?" → receive (memory works over WS); turn 3 send "Who handles it if open more than 7 days?" and CLOSE the socket immediately without reading the reply (abrupt mid-conversation disconnect).
-   e. WebSocket client B (session "ws_b") connects afterwards: "When do service credits expire?" → normal reply. Then GET /health → ok. Print "SERVER SURVIVED CLIENT DISCONNECT ✓".
-   f. Print the last log lines showing the ws_disconnect event.
-
-6) demos/task12_logging.py → tee_transcript("task12_logging"): note the current line count of logs/requests.jsonl; POST /ask "My number is +91 98765 43210, check OLA-1027"; read ONLY the new line(s); pretty-print the new log line; assert it has a trace_id, timings_ms and latency; assert the trace_id equals the one in the HTTP response; assert none of "9876543210", "98765 43210", "+91 98765" appear ANYWHERE in logs/requests.jsonl → print "RAW PII NOT IN LOG ✓"; confirm request_text contains "[PHONE]". Also show one blocked request (an injection) and one rejected (oversized) request each producing exactly one log line.
-   Then copy the log lines produced by these two demos into logs/sample_requests.jsonl, and update .gitignore so logs/*.jsonl stays ignored EXCEPT logs/sample_requests.jsonl (add a !logs/sample_requests.jsonl rule).
-
-7) tests/test_api.py (TestClient): /health, /ask schema, /add-document validation error on a bad doc_id (422), a WS round-trip, survival after a WS disconnect, the log line written with a trace_id and no raw phone number. Any test that calls /add-document must clean up its chunks afterwards.
-
-8) Real-server smoke test: start `uvicorn api.main:app --port 8000` in the background, call GET /health and POST /ask once with httpx against http://127.0.0.1:8000, print both responses, then stop the server. Document the run command in Section 15.4.
-
-Run: task15_budget, task16_cache, task11_api, task12_logging, the smoke test, and the full pytest suite.
-
-Report back: `type` transcripts task15_budget, task16_cache, task11_api, task12_logging verbatim; the smoke-test output; the first 3 lines of logs/sample_requests.jsonl; and the pytest summary. Then STOP.# Ola Domain Support Agent — Architecture & Build Reference
+# Ola Domain Support Agent — Architecture & Build Reference
 
 **Track:** Business Operations / Customer Support (Ola)
 **Project folder / repo name:** `ola-support-agent`
@@ -974,7 +933,7 @@ Each phase is one coding-agent prompt. The prompt says "Implement Phase N as spe
 | Tickets above threshold | 13 / 50 (26.0%) | task06 demo | 4 |
 | Normal request tokens (policy / ticket / mixed) | policy: 2727, ticket: 2504, mixed: 4586 tokens | Phase 8 measurement | 8 |
 | MAX_INPUT_TOKENS / MAX_REQUEST_TOKENS | 256 / 7000 | 1.5 × 4586 = 6879 -> 7000 tokens | 8 |
-| Eval averages (A / G / C / S) | A: 0.900 / G: 0.933 / C: 0.933 / S: 1.000 (13/15 perfect) | run_eval.py | 10 |
+| Eval averages (A / G / C / S) | A: 0.833 / G: 1.000 / C: 0.933 / S: 1.000 (11/15 perfect) | run_eval.py | 10 |
 
 **Note on retrieval eval (Phase 3):** Known limitation: multi-topic queries (Q4, Q5) retrieve only part of the gold set with single-vector top-3 retrieval — kept as measured, noted in README.
 Near-domain out-of-scope queries score close to the threshold (e.g. 'pet-friendly cabs' = 0.3955 vs 0.41). The threshold is kept at the calibrated midpoint; the claim-level groundedness check and the Autogen review act as a second line of defence.

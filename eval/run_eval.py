@@ -41,14 +41,18 @@ def main():
             session_id = f"eval_case_{case.id}"
             res = answer_sync(session_id, case.query)
 
-            # Build context
+            # Build context: EXACTLY the context the pipeline used (rag_context + ticket JSON)
             context_items = []
-            if res.sources:
+            if res.rag_context:
+                context_items.extend(res.rag_context)
+            elif res.sources:
                 retrieved = retrieve(case.query, config.DEPLOYED_COLLECTION, k=config.TOP_K)
                 for chunk in retrieved:
                     context_items.append(chunk["text"])
             if res.ticket:
-                context_items.append(json.dumps(res.ticket.model_dump()))
+                t_dict = res.ticket.model_dump()
+                t_dict["found"] = True
+                context_items.append(json.dumps(t_dict))
 
             prompt = build_judge_prompt(
                 question=case.query,
@@ -65,6 +69,8 @@ def main():
                 first_prompt_printed = True
 
             ticket_dict = res.ticket.model_dump() if res.ticket else None
+            if ticket_dict:
+                ticket_dict["found"] = True
             scores = MockJudge.judge(
                 prompt,
                 expected_doc=case.expected_doc,
@@ -93,6 +99,7 @@ def main():
                 "expected_facts": case.expected_facts,
                 "status": res.status,
                 "intent": res.intent,
+                "grounded": res.grounded,
                 "answer": res.answer,
                 "sources": res.sources,
                 "top_similarity": res.top_similarity,
@@ -125,6 +132,18 @@ def main():
             )
 
         print("-" * len(header))
+
+        # ---------------------------------------------------------------------
+        # Consistency Check
+        # ---------------------------------------------------------------------
+        warnings_found = []
+        for r in results:
+            if r["status"] == "ok" and r.get("grounded", False) and r["scores"]["grounding"] < 1.0:
+                warn_msg = f"WARNING: Case {r['id']} [{r['topic']}] passed pipeline groundedness but judge grounding is {r['scores']['grounding']:.2f}"
+                warnings_found.append(warn_msg)
+                print(warn_msg)
+        if not warnings_found:
+            print("CONSISTENCY CHECK: All cases with status 'ok' and pipeline groundedness have judge grounding 1.0 ✓")
 
         # ---------------------------------------------------------------------
         # Print Detailed Case Rationales & Similarities

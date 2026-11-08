@@ -43,6 +43,7 @@ class PipelineResult(BaseModel):
     masked_question: str = ""
     resolved_question: str | None = None
     sources: list[str] = Field(default_factory=list)
+    rag_context: list[str] = Field(default_factory=list)
     ticket: TicketInfo | None = None
     grounded: bool
     top_similarity: float | None = None

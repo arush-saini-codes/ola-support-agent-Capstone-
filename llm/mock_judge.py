@@ -118,6 +118,9 @@ class MockJudge:
                     pass
             context_chunks.append(line_s)
 
+        if ticket_json and "record_id" in ticket_json:
+            ticket_json["found"] = True
+
         is_refusal = (
             status in ["refused", "blocked"]
             or intent in ["refused", "blocked", "fallback"]
@@ -160,22 +163,21 @@ class MockJudge:
                 valid_numbers = set()
                 # Numbers from expected doc file if present
                 if expected_doc:
-                    doc_path = config.KB_DIR / f"{expected_doc}.txt"
+                    doc_path = config.KB_DIR / f"{expected_doc}.md"
+                    if not doc_path.exists():
+                        doc_path = config.KB_DIR / f"{expected_doc}.txt"
                     if doc_path.exists():
                         doc_text = doc_path.read_text(encoding="utf-8")
                         valid_numbers.update(re.findall(r"\b\d+(?:\.\d+)?\b", doc_text))
-                # Also include context chunks
-                for c in context_chunks:
-                    valid_numbers.update(re.findall(r"\b\d+(?:\.\d+)?\b", c))
                 # Numbers from ticket JSON
                 if ticket_json:
                     for k, v in ticket_json.items():
                         valid_numbers.update(re.findall(r"\b\d+(?:\.\d+)?\b", str(v)))
 
-                stray = [n for n in ans_numbers if n not in valid_numbers]
+                stray = sorted(list(ans_numbers - valid_numbers))
                 if stray:
                     accuracy = 0.5
-                    rationale_parts.append(f"Expected doc cited but ungrounded numbers found: {stray}")
+                    rationale_parts.append(f"Expected doc cited but numbers {stray} not in expected doc/ticket JSON")
                 else:
                     accuracy = 1.0
                     rationale_parts.append(f"Expected doc '{expected_doc}' cited and factual content aligned")
