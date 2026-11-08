@@ -1,0 +1,107 @@
+================================================================================
+TASK 5: CHUNKING STRATEGY EVALUATION REPORT
+================================================================================
+
+================================================================================
+EVALUATION FOR COLLECTION: ola_kb_fixed
+================================================================================
+
+[Q1] "What is the resolution time for a P1 ticket?"
+  Retrieved Chunks : ['02_sla_by_severity::fixed::1', '02_sla_by_severity::fixed::2', '02_sla_by_severity::fixed::0']
+  Deduped Docs     : ['02_sla_by_severity']
+  Relevant Gold Set: ['02_sla_by_severity']
+  Intersection     : ['02_sla_by_severity']
+  Arithmetic       : P = 1/1 = 1.000, R = 1/1 = 1.000
+
+[Q2] "When do service credits expire and how much credit is given for a P2 SLA breach?"
+  Retrieved Chunks : ['08_service_credits::fixed::2', '08_service_credits::fixed::3', '02_sla_by_severity::fixed::4']
+  Deduped Docs     : ['02_sla_by_severity', '08_service_credits']
+  Relevant Gold Set: ['08_service_credits']
+  Intersection     : ['08_service_credits']
+  Arithmetic       : P = 1/2 = 0.500, R = 1/1 = 1.000
+
+[Q3] "Who handles a ticket that has been open for more than 7 days?"
+  Retrieved Chunks : ['09_feedback_collection::fixed::1', '03_escalation_matrix::fixed::2', '11_outage_communication::fixed::4']
+  Deduped Docs     : ['03_escalation_matrix', '09_feedback_collection', '11_outage_communication']
+  Relevant Gold Set: ['03_escalation_matrix']
+  Intersection     : ['03_escalation_matrix']
+  Arithmetic       : P = 1/3 = 0.333, R = 1/1 = 1.000
+
+[Q4] "A P1 ticket breached its SLA — who handles it and what service credit applies?"
+  Retrieved Chunks : ['08_service_credits::fixed::2', '03_escalation_matrix::fixed::2', '01_ticket_priority::fixed::2']
+  Deduped Docs     : ['01_ticket_priority', '03_escalation_matrix', '08_service_credits']
+  Relevant Gold Set: ['02_sla_by_severity', '03_escalation_matrix', '08_service_credits']
+  Intersection     : ['03_escalation_matrix', '08_service_credits']
+  Arithmetic       : P = 2/3 = 0.667, R = 2/3 = 0.667
+
+[Q5] "A VIP rider complained twice about billing within a month — how is the ticket prioritised?"
+  Retrieved Chunks : ['01_ticket_priority::fixed::2', '04_refund_compensation::fixed::0', '01_ticket_priority::fixed::3']
+  Deduped Docs     : ['01_ticket_priority', '04_refund_compensation']
+  Relevant Gold Set: ['07_repeat_complaints', '10_vip_handling']
+  Intersection     : []
+  Arithmetic       : P = 0/2 = 0.000, R = 0/2 = 0.000
+
+--- MACRO-AVERAGES FOR ola_kb_fixed ---
+Macro-Average Precision: 0.500
+Macro-Average Recall   : 0.733
+Combined Mean (P+R)/2  : 0.617
+
+================================================================================
+EVALUATION FOR COLLECTION: ola_kb_sentence
+================================================================================
+
+[Q1] "What is the resolution time for a P1 ticket?"
+  Retrieved Chunks : ['02_sla_by_severity::sent::1', '02_sla_by_severity::sent::2', '02_sla_by_severity::sent::3']
+  Deduped Docs     : ['02_sla_by_severity']
+  Relevant Gold Set: ['02_sla_by_severity']
+  Intersection     : ['02_sla_by_severity']
+  Arithmetic       : P = 1/1 = 1.000, R = 1/1 = 1.000
+
+[Q2] "When do service credits expire and how much credit is given for a P2 SLA breach?"
+  Retrieved Chunks : ['08_service_credits::sent::3', '02_sla_by_severity::sent::4', '08_service_credits::sent::2']
+  Deduped Docs     : ['02_sla_by_severity', '08_service_credits']
+  Relevant Gold Set: ['08_service_credits']
+  Intersection     : ['08_service_credits']
+  Arithmetic       : P = 1/2 = 0.500, R = 1/1 = 1.000
+
+[Q3] "Who handles a ticket that has been open for more than 7 days?"
+  Retrieved Chunks : ['03_escalation_matrix::sent::2', '09_feedback_collection::sent::1', '11_outage_communication::sent::3']
+  Deduped Docs     : ['03_escalation_matrix', '09_feedback_collection', '11_outage_communication']
+  Relevant Gold Set: ['03_escalation_matrix']
+  Intersection     : ['03_escalation_matrix']
+  Arithmetic       : P = 1/3 = 0.333, R = 1/1 = 1.000
+
+[Q4] "A P1 ticket breached its SLA — who handles it and what service credit applies?"
+  Retrieved Chunks : ['01_ticket_priority::sent::1', '01_ticket_priority::sent::2', '08_service_credits::sent::1']
+  Deduped Docs     : ['01_ticket_priority', '08_service_credits']
+  Relevant Gold Set: ['02_sla_by_severity', '03_escalation_matrix', '08_service_credits']
+  Intersection     : ['08_service_credits']
+  Arithmetic       : P = 1/2 = 0.500, R = 1/3 = 0.333
+
+[Q5] "A VIP rider complained twice about billing within a month — how is the ticket prioritised?"
+  Retrieved Chunks : ['01_ticket_priority::sent::2', '07_repeat_complaints::sent::0', '04_refund_compensation::sent::0']
+  Deduped Docs     : ['01_ticket_priority', '04_refund_compensation', '07_repeat_complaints']
+  Relevant Gold Set: ['07_repeat_complaints', '10_vip_handling']
+  Intersection     : ['07_repeat_complaints']
+  Arithmetic       : P = 1/3 = 0.333, R = 1/2 = 0.500
+
+--- MACRO-AVERAGES FOR ola_kb_sentence ---
+Macro-Average Precision: 0.533
+Macro-Average Recall   : 0.767
+Combined Mean (P+R)/2  : 0.650
+
+================================================================================
+SIDE-BY-SIDE SUMMARY COMPARISON
+================================================================================
+Query    | Fixed Prec   | Fixed Rec    | Sent Prec    | Sent Rec    
+--------------------------------------------------------------------
+Q1       | 1.000        | 1.000        | 1.000        | 1.000       
+Q2       | 0.500        | 1.000        | 0.500        | 1.000       
+Q3       | 0.333        | 1.000        | 0.333        | 1.000       
+Q4       | 0.667        | 0.667        | 0.500        | 0.333       
+Q5       | 0.000        | 0.000        | 0.333        | 0.500       
+--------------------------------------------------------------------
+AVERAGE  | 0.500        | 0.733        | 0.533        | 0.767       
+
+--- RECOMMENDATION & STRATEGY SELECTION ---
+Based on empirical retrieval evaluation, collection 'ola_kb_sentence' achieved macro-average precision of 0.533 and recall of 0.767 (mean score: 0.650), compared to 'ola_kb_fixed' with precision of 0.500 and recall of 0.733 (mean score: 0.617). Sentence-based chunking preserves atomic policy facts cleanly without character-window boundary splits. Therefore, 'ola_kb_sentence' is recommended and selected as DEPLOYED_COLLECTION.

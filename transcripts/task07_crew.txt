@@ -1,0 +1,772 @@
+================================================================================
+TASK 7: MULTI-AGENT CREWAI ORCHESTRATION DEMO
+================================================================================
+
+================================================================================
+RUNNING SCENARIO A (Policy Query): "What is the resolution time for a P1 ticket?"
+Expected Tools: ['rag_lookup']
+================================================================================
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: 5f87d664-5bb9-4ff0-9aa2-98503103c052                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]What is the resolution time   │
+│  for a P1 ticket?[[/QUERY]]                                                 │
+│  ID: 2a20a82e-5f8b-44ff-976b-2e31bb28d296                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]What is the resolution time   │
+│  for a P1 ticket?[[/QUERY]]                                                 │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "What is the resolution time for a P1 ticket?"}
+┌────────────────────── 🔧 Tool Execution Started (#1) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "What is the resolution time for a P1 ticket?"}            │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#1) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "For critical P1 tickets, representatives must deliver  │
+│  an initial response within 15 minutes and achieve complete resolution      │
+│  within 4 hours. [Source: 02_sla_by_severity]", "sources":                  │
+│  ["02_sla_by_severity"], "top_similarity": 0.7545, "grounded": true,        │
+│  "context": ["For critical P1 tickets, representatives must deliver an      │
+│  initial response within 15 minutes and achieve complete resolution within  │
+│  4 hours.", "High urgency P2 issues require a 1 hour initial response and   │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window.", "Routine P4 requests are allotted a 24  │
+│  hour initial contact window and a 72 hour resolution target."],            │
+│  "threshold_used": 0.41}                                                    │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "For critical P1 tickets, representatives must deliver an       │
+│  initial response within 15 minutes and achieve complete resolution within  │
+│  4 hours. [Source: 02_sla_by_severity]", "sources":                         │
+│  ["02_sla_by_severity"], "top_similarity": 0.7545, "grounded": true,        │
+│  "context": ["For critical P1 tickets, representatives must deliver an      │
+│  initial response within 15 minutes and achieve complete resolution within  │
+│  4 hours.", "High urgency P2 issues require a 1 hour initial response and   │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window.", "Routine P4 requests are allotted a 24  │
+│  hour initial contact window and a 72 hour resolution target."],            │
+│  "threshold_used": 0.41}                                                    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]", "sources": ["02_sla_by_severity"], "top_similarity": 0.7545, "grounded": true, "context": ["For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours.", "High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window.", "Routine P4 requests are allotted a 24 hour initial contact window and a 72 hour resolution target."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]", "sources": ["02_sla_by_severity"], "top_similarity": 0.7545, "grounded": true, "context": ["For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours.", "High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window.", "Routine P4 requests are allotted a 24 hour initial contact window and a 72 hour resolution target."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "For critical P1 tickets, representatives must deliver an       │
+│  initial response within 15 minutes and achieve complete resolution within  │
+│  4 hours. [Source: 02_sla_by_severity]", "sources":                         │
+│  ["02_sla_by_severity"], "top_similarity": 0.7545, "grounded": true,        │
+│  "context": ["For critical P1 tickets, representatives must deliver an      │
+│  initial response within 15 minutes and achieve complete resolution within  │
+│  4 hours.", "High urgency P2 issues require a 1 hour initial response and   │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window.", "Routine P4 requests are allotted a 24  │
+│  hour initial contact window and a 72 hour resolution target."],            │
+│  "threshold_used": 0.41}                                                    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]What is the resolution time   │
+│  for a P1 ticket?[[/QUERY]]                                                 │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]What is the resolution  │
+│  time for a P1 ticket?[[/QUERY]]                                            │
+│  ID: 6121d9c3-baa3-4e0b-86b7-e636a55a97bc                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]What is the resolution  │
+│  time for a P1 ticket?[[/QUERY]]                                            │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]","intent":"policy","sources":["02_sla_by_severity"],"ticket":null,"grounded":true,"top_similarity":0.7545,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"For critical P1 tickets, representatives must deliver an        │
+│  initial response within 15 minutes and achieve complete resolution within  │
+│  4 hours. [Source:                                                          │
+│  02_sla_by_severity]","intent":"policy","sources":["02_sla_by_severity"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.7545,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]What is the resolution  │
+│  time for a P1 ticket?[[/QUERY]]                                            │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: 5f87d664-5bb9-4ff0-9aa2-98503103c052                                   │
+│  Final Output: {"answer":"For critical P1 tickets, representatives must     │
+│  deliver an initial response within 15 minutes and achieve complete         │
+│  resolution within 4 hours. [Source:                                        │
+│  02_sla_by_severity]","intent":"policy","sources":["02_sla_by_severity"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.7545,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+--- RESULTS & VERIFICATION ---
+Detected Intent : policy
+Tools Called    : ['rag_lookup']
+Tool Calls Count: 1
+LLM Calls Count : 3
+
+TOOL_CALL_LOG entries:
+  - rag_lookup with args: {'query': 'What is the resolution time for a P1 ticket?'}
+
+Structured SupportResponse JSON:
+{
+  "answer": "For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]",
+  "intent": "policy",
+  "sources": [
+    "02_sla_by_severity"
+  ],
+  "ticket": null,
+  "grounded": true,
+  "top_similarity": 0.7545,
+  "guardrail_flags": []
+}
+[PASS] Exact expected tools invoked ✓
+
+================================================================================
+RUNNING SCENARIO B (Ticket Query): "What is the status of OLA-1001?"
+Expected Tools: ['check_support_ticket_status']
+================================================================================
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: 8121bc47-3200-4802-afe7-dbb9d13e6c06                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Look up the ticket referenced in: [[QUERY]]What is the status of     │
+│  OLA-1001?[[/QUERY]]                                                        │
+│  ID: 98351ccc-0012-4fbc-9086-d3cde1765db9                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Task: Look up the ticket referenced in: [[QUERY]]What is the status of     │
+│  OLA-1001?[[/QUERY]]                                                        │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - lookup]
+Thought: I should use check_support_ticket_status.
+Action: check_support_ticket_status
+Action Input: {"record_id": "OLA-1001"}
+┌────────────────────── 🔧 Tool Execution Started (#1) ───────────────────────┐
+│                                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Args: {"record_id": "OLA-1001"}                                            │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#1) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Output: {"found": true, "record_id": "OLA-1001", "category": "Account      │
+│  Access", "severity": "P2", "status": "Open", "resolution_time_hours":      │
+│  5.2, "days_since_created": 7, "escalated": false, "escalation_score":      │
+│  0.093, "escalation_recommended": false, "score_explanation": "0.6*0 +      │
+│  0.4*(7/30) = 0.093; status Open -> activity 1.0; final 0.093 <= threshold  │
+│  0.32"}                                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"found": true, "record_id": "OLA-1001", "category": "Account Access",     │
+│  "severity": "P2", "status": "Open", "resolution_time_hours": 5.2,          │
+│  "days_since_created": 7, "escalated": false, "escalation_score": 0.093,    │
+│  "escalation_recommended": false, "score_explanation": "0.6*0 + 0.4*(7/30)  │
+│  = 0.093; status Open -> activity 1.0; final 0.093 <= threshold 0.32"}      │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+
+[ReAct Trace - lookup]
+Observation: {"found": true, "record_id": "OLA-1001", "category": "Account Access", "severity": "P2", "status": "Open", "resolution_time_hours": 5.2, "days_since_created": 7, "escalated": false, "escalation_score": 0.093, "escalation_recommended": false, "score_explanation": "0.6*0 + 0.4*(7/30) = 0.093; status Open -> activity 1.0; final 0.093 <= threshold 0.32"}
+Thought: I now know the final answer
+Final Answer: {"found": true, "record_id": "OLA-1001", "category": "Account Access", "severity": "P2", "status": "Open", "resolution_time_hours": 5.2, "days_since_created": 7, "escalated": false, "escalation_score": 0.093, "escalation_recommended": false, "score_explanation": "0.6*0 + 0.4*(7/30) = 0.093; status Open -> activity 1.0; final 0.093 <= threshold 0.32"}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"found": true, "record_id": "OLA-1001", "category": "Account Access",     │
+│  "severity": "P2", "status": "Open", "resolution_time_hours": 5.2,          │
+│  "days_since_created": 7, "escalated": false, "escalation_score": 0.093,    │
+│  "escalation_recommended": false, "score_explanation": "0.6*0 + 0.4*(7/30)  │
+│  = 0.093; status Open -> activity 1.0; final 0.093 <= threshold 0.32"}      │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Look up the ticket referenced in: [[QUERY]]What is the status of     │
+│  OLA-1001?[[/QUERY]]                                                        │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]What is the status of   │
+│  OLA-1001?[[/QUERY]]                                                        │
+│  ID: 0c625eaa-c792-452c-976a-e4e42c34b91e                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]What is the status of   │
+│  OLA-1001?[[/QUERY]]                                                        │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"Ticket OLA-1001 (Account Access, P2) is Open, created 7 days ago, resolution time so far 5.2 h. Escalation score 0.093 — escalation not recommended.","intent":"ticket","sources":[],"ticket":{"record_id":"OLA-1001","category":"Account Access","severity":"P2","status":"Open","resolution_time_hours":5.2,"days_since_created":7,"escalated":false,"escalation_score":0.093,"escalation_recommended":false},"grounded":true,"top_similarity":null,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"Ticket OLA-1001 (Account Access, P2) is Open, created 7 days    │
+│  ago, resolution time so far 5.2 h. Escalation score 0.093 — escalation     │
+│  not                                                                        │
+│  recommended.","intent":"ticket","sources":[],"ticket":{"record_id":"OLA-1  │
+│  001","category":"Account                                                   │
+│  Access","severity":"P2","status":"Open","resolution_time_hours":5.2,"days  │
+│  _since_created":7,"escalated":false,"escalation_score":0.093,"escalation_  │
+│  recommended":false},"grounded":true,"top_similarity":null,"guardrail_flag  │
+│  s":[]}                                                                     │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]What is the status of   │
+│  OLA-1001?[[/QUERY]]                                                        │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: 8121bc47-3200-4802-afe7-dbb9d13e6c06                                   │
+│  Final Output: {"answer":"Ticket OLA-1001 (Account Access, P2) is Open,     │
+│  created 7 days ago, resolution time so far 5.2 h. Escalation score 0.093   │
+│  — escalation not                                                           │
+│  recommended.","intent":"ticket","sources":[],"ticket":{"record_id":"OLA-1  │
+│  001","category":"Account                                                   │
+│  Access","severity":"P2","status":"Open","resolution_time_hours":5.2,"days  │
+│  _since_created":7,"escalated":false,"escalation_score":0.093,"escalation_  │
+│  recommended":false},"grounded":true,"top_similarity":null,"guardrail_flag  │
+│  s":[]}                                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+--- RESULTS & VERIFICATION ---
+Detected Intent : ticket
+Tools Called    : ['check_support_ticket_status']
+Tool Calls Count: 1
+LLM Calls Count : 3
+
+TOOL_CALL_LOG entries:
+  - check_support_ticket_status with args: {'record_id': 'OLA-1001'}
+
+Structured SupportResponse JSON:
+{
+  "answer": "Ticket OLA-1001 (Account Access, P2) is Open, created 7 days ago, resolution time so far 5.2 h. Escalation score 0.093 — escalation not recommended.",
+  "intent": "ticket",
+  "sources": [],
+  "ticket": {
+    "record_id": "OLA-1001",
+    "category": "Account Access",
+    "severity": "P2",
+    "status": "Open",
+    "resolution_time_hours": 5.2,
+    "days_since_created": 7,
+    "escalated": false,
+    "escalation_score": 0.093,
+    "escalation_recommended": false
+  },
+  "grounded": true,
+  "top_similarity": null,
+  "guardrail_flags": []
+}
+[PASS] Exact expected tools invoked ✓
+
+================================================================================
+RUNNING SCENARIO C (Mixed Query): "OLA-1027 is still open — who should it be escalated to?"
+Expected Tools: ['check_support_ticket_status', 'rag_lookup']
+================================================================================
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: 5d7f5f03-06a7-46ee-b0d7-a2efb8a699d9                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Look up the ticket referenced in: [[QUERY]]OLA-1027 is still open —  │
+│  who should it be escalated to?[[/QUERY]]                                   │
+│  ID: 04f34f34-0836-4841-8466-39ef4b76b2bc                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Task: Look up the ticket referenced in: [[QUERY]]OLA-1027 is still open —  │
+│  who should it be escalated to?[[/QUERY]]                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - lookup]
+Thought: I should use check_support_ticket_status.
+Action: check_support_ticket_status
+Action Input: {"record_id": "OLA-1027"}
+┌────────────────────── 🔧 Tool Execution Started (#2) ───────────────────────┐
+│                                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Args: {"record_id": "OLA-1027"}                                            │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#2) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Output: {"found": true, "record_id": "OLA-1027", "category": "General      │
+│  Inquiry", "severity": "P2", "status": "Escalated",                         │
+│  "resolution_time_hours": 15.4, "days_since_created": 17, "escalated":      │
+│  true, "escalation_score": 0.827, "escalation_recommended": true,           │
+│  "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated ->     │
+│  activity 1.0; final 0.827 > threshold 0.32"}                               │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"found": true, "record_id": "OLA-1027", "category": "General Inquiry",    │
+│  "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4,    │
+│  "days_since_created": 17, "escalated": true, "escalation_score": 0.827,    │
+│  "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30)  │
+│  = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+
+[ReAct Trace - lookup]
+Observation: {"found": true, "record_id": "OLA-1027", "category": "General Inquiry", "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4, "days_since_created": 17, "escalated": true, "escalation_score": 0.827, "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}
+Thought: I now know the final answer
+Final Answer: {"found": true, "record_id": "OLA-1027", "category": "General Inquiry", "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4, "days_since_created": 17, "escalated": true, "escalation_score": 0.827, "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"found": true, "record_id": "OLA-1027", "category": "General Inquiry",    │
+│  "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4,    │
+│  "days_since_created": 17, "escalated": true, "escalation_score": 0.827,    │
+│  "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30)  │
+│  = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Look up the ticket referenced in: [[QUERY]]OLA-1027 is still open —  │
+│  who should it be escalated to?[[/QUERY]]                                   │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]OLA-1027 is still open — who  │
+│  should it be escalated to?[[/QUERY]]                                       │
+│  ID: a8695b6b-fbab-43a3-83ea-278b9b7e63ba                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]OLA-1027 is still open — who  │
+│  should it be escalated to?[[/QUERY]]                                       │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "is still open \u2014 who should it be escalated to? (for a P2 General Inquiry ticket open 17 days)"}
+┌────────────────────── 🔧 Tool Execution Started (#2) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "is still open \u2014 who should it be escalated to? (for  │
+│  a P2 General Inquiry ticket open 17 days)"}                                │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#2) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "If a respondent submits an adverse rating of 2 stars   │
+│  or lower, the ticketing system automatically reopens an investigative      │
+│  follow-up task within 48 hours. An L3 operations manager handles any P1    │
+│  emergency, any recognized VIP ticket, or any unresolved ticket open for    │
+│  more than 7 days. [Source: 03_escalation_matrix,                           │
+│  09_feedback_collection]", "sources": ["03_escalation_matrix",              │
+│  "09_feedback_collection"], "top_similarity": 0.512, "grounded": true,      │
+│  "context": ["If a respondent submits an adverse rating of 2 stars or       │
+│  lower, the ticketing system automatically reopens an investigative         │
+│  follow-up task within 48 hours.", "An L3 operations manager handles any    │
+│  P1 emergency, any recognized VIP ticket, or any unresolved ticket open     │
+│  for more than 7 days.", "Furthermore, ticket resolution must be assigned   │
+│  to an experienced L2 senior agent at a minimum to safeguard relationship   │
+│  continuity."], "threshold_used": 0.41}                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "If a respondent submits an adverse rating of 2 stars or        │
+│  lower, the ticketing system automatically reopens an investigative         │
+│  follow-up task within 48 hours. An L3 operations manager handles any P1    │
+│  emergency, any recognized VIP ticket, or any unresolved ticket open for    │
+│  more than 7 days. [Source: 03_escalation_matrix,                           │
+│  09_feedback_collection]", "sources": ["03_escalation_matrix",              │
+│  "09_feedback_collection"], "top_similarity": 0.512, "grounded": true,      │
+│  "context": ["If a respondent submits an adverse rating of 2 stars or       │
+│  lower, the ticketing system automatically reopens an investigative         │
+│  follow-up task within 48 hours.", "An L3 operations manager handles any    │
+│  P1 emergency, any recognized VIP ticket, or any unresolved ticket open     │
+│  for more than 7 days.", "Furthermore, ticket resolution must be assigned   │
+│  to an experienced L2 senior agent at a minimum to safeguard relationship   │
+│  continuity."], "threshold_used": 0.41}                                     │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours. An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days. [Source: 03_escalation_matrix, 09_feedback_collection]", "sources": ["03_escalation_matrix", "09_feedback_collection"], "top_similarity": 0.512, "grounded": true, "context": ["If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours.", "An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days.", "Furthermore, ticket resolution must be assigned to an experienced L2 senior agent at a minimum to safeguard relationship continuity."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours. An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days. [Source: 03_escalation_matrix, 09_feedback_collection]", "sources": ["03_escalation_matrix", "09_feedback_collection"], "top_similarity": 0.512, "grounded": true, "context": ["If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours.", "An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days.", "Furthermore, ticket resolution must be assigned to an experienced L2 senior agent at a minimum to safeguard relationship continuity."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "If a respondent submits an adverse rating of 2 stars or        │
+│  lower, the ticketing system automatically reopens an investigative         │
+│  follow-up task within 48 hours. An L3 operations manager handles any P1    │
+│  emergency, any recognized VIP ticket, or any unresolved ticket open for    │
+│  more than 7 days. [Source: 03_escalation_matrix,                           │
+│  09_feedback_collection]", "sources": ["03_escalation_matrix",              │
+│  "09_feedback_collection"], "top_similarity": 0.512, "grounded": true,      │
+│  "context": ["If a respondent submits an adverse rating of 2 stars or       │
+│  lower, the ticketing system automatically reopens an investigative         │
+│  follow-up task within 48 hours.", "An L3 operations manager handles any    │
+│  P1 emergency, any recognized VIP ticket, or any unresolved ticket open     │
+│  for more than 7 days.", "Furthermore, ticket resolution must be assigned   │
+│  to an experienced L2 senior agent at a minimum to safeguard relationship   │
+│  continuity."], "threshold_used": 0.41}                                     │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]OLA-1027 is still open — who  │
+│  should it be escalated to?[[/QUERY]]                                       │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]OLA-1027 is still open  │
+│  — who should it be escalated to?[[/QUERY]]                                 │
+│  ID: 992524dc-b394-48a1-b94c-366bb1955a01                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]OLA-1027 is still open  │
+│  — who should it be escalated to?[[/QUERY]]                                 │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation score 0.827 — escalation recommended.\n\nPolicy: If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours. An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days. [Source: 03_escalation_matrix, 09_feedback_collection]","intent":"mixed","sources":["03_escalation_matrix","09_feedback_collection"],"ticket":{"record_id":"OLA-1027","category":"General Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"escalation_recommended":true},"grounded":true,"top_similarity":0.512,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17  │
+│  days ago, resolution time so far 15.4 h. Escalation score 0.827 —          │
+│  escalation recommended.\n\nPolicy: If a respondent submits an adverse      │
+│  rating of 2 stars or lower, the ticketing system automatically reopens an  │
+│  investigative follow-up task within 48 hours. An L3 operations manager     │
+│  handles any P1 emergency, any recognized VIP ticket, or any unresolved     │
+│  ticket open for more than 7 days. [Source: 03_escalation_matrix,           │
+│  09_feedback_collection]","intent":"mixed","sources":["03_escalation_matri  │
+│  x","09_feedback_collection"],"ticket":{"record_id":"OLA-1027","category":  │
+│  "General                                                                   │
+│  Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.  │
+│  4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"esca  │
+│  lation_recommended":true},"grounded":true,"top_similarity":0.512,"guardra  │
+│  il_flags":[]}                                                              │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]OLA-1027 is still open  │
+│  — who should it be escalated to?[[/QUERY]]                                 │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: 5d7f5f03-06a7-46ee-b0d7-a2efb8a699d9                                   │
+│  Final Output: {"answer":"Ticket OLA-1027 (General Inquiry, P2) is          │
+│  Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation  │
+│  score 0.827 — escalation recommended.\n\nPolicy: If a respondent submits   │
+│  an adverse rating of 2 stars or lower, the ticketing system automatically  │
+│  reopens an investigative follow-up task within 48 hours. An L3 operations  │
+│  manager handles any P1 emergency, any recognized VIP ticket, or any        │
+│  unresolved ticket open for more than 7 days. [Source:                      │
+│  03_escalation_matrix,                                                      │
+│  09_feedback_collection]","intent":"mixed","sources":["03_escalation_matri  │
+│  x","09_feedback_collection"],"ticket":{"record_id":"OLA-1027","category":  │
+│  "General                                                                   │
+│  Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.  │
+│  4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"esca  │
+│  lation_recommended":true},"grounded":true,"top_similarity":0.512,"guardra  │
+│  il_flags":[]}                                                              │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+--- RESULTS & VERIFICATION ---
+Detected Intent : mixed
+Tools Called    : ['check_support_ticket_status', 'rag_lookup']
+Tool Calls Count: 2
+LLM Calls Count : 5
+
+TOOL_CALL_LOG entries:
+  - check_support_ticket_status with args: {'record_id': 'OLA-1027'}
+  - rag_lookup with args: {'query': 'is still open — who should it be escalated to? (for a P2 General Inquiry ticket open 17 days)'}
+
+Structured SupportResponse JSON:
+{
+  "answer": "Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation score 0.827 — escalation recommended.\n\nPolicy: If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours. An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days. [Source: 03_escalation_matrix, 09_feedback_collection]",
+  "intent": "mixed",
+  "sources": [
+    "03_escalation_matrix",
+    "09_feedback_collection"
+  ],
+  "ticket": {
+    "record_id": "OLA-1027",
+    "category": "General Inquiry",
+    "severity": "P2",
+    "status": "Escalated",
+    "resolution_time_hours": 15.4,
+    "days_since_created": 17,
+    "escalated": true,
+    "escalation_score": 0.827,
+    "escalation_recommended": true
+  },
+  "grounded": true,
+  "top_similarity": 0.512,
+  "guardrail_flags": []
+}
+
+[Scenario C Detail] Rewritten Query: "is still open — who should it be escalated to? (for a P2 General Inquiry ticket open 17 days)"
+[Scenario C Detail] Top Similarity: 0.512 vs 0.41 (Grounded: True)
+[Scenario C Detail] Final Answer:
+Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation score 0.827 — escalation recommended.
+
+Policy: If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours. An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days. [Source: 03_escalation_matrix, 09_feedback_collection]
+[PASS] Exact expected tools invoked ✓
+
+================================================================================
+TASK 7 OVERALL SUMMARY
+================================================================================
+Final Task 7 Status: ALL CHECKS PASSED ✓

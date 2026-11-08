@@ -1,0 +1,452 @@
+[
+  {
+    "record_id": "OLA-1001",
+    "category": "Account Access",
+    "status": "Open",
+    "severity": "P2",
+    "days_since_created": 7,
+    "escalated": false,
+    "resolution_time_hours": 5.2
+  },
+  {
+    "record_id": "OLA-1002",
+    "category": "Product Defect",
+    "status": "Resolved",
+    "severity": "P3",
+    "days_since_created": 1,
+    "escalated": true,
+    "resolution_time_hours": 14.0
+  },
+  {
+    "record_id": "OLA-1003",
+    "category": "Account Access",
+    "status": "Open",
+    "severity": "P2",
+    "days_since_created": 20,
+    "escalated": false,
+    "resolution_time_hours": 10.1
+  },
+  {
+    "record_id": "OLA-1004",
+    "category": "Technical Issue",
+    "status": "In Progress",
+    "severity": "P4",
+    "days_since_created": 24,
+    "escalated": false,
+    "resolution_time_hours": 86.9
+  },
+  {
+    "record_id": "OLA-1005",
+    "category": "Technical Issue",
+    "status": "Open",
+    "severity": "P4",
+    "days_since_created": 10,
+    "escalated": true,
+    "resolution_time_hours": 57.2
+  },
+  {
+    "record_id": "OLA-1006",
+    "category": "Technical Issue",
+    "status": "In Progress",
+    "severity": "P2",
+    "days_since_created": 1,
+    "escalated": false,
+    "resolution_time_hours": 12.0
+  },
+  {
+    "record_id": "OLA-1007",
+    "category": "General Inquiry",
+    "status": "In Progress",
+    "severity": "P3",
+    "days_since_created": 26,
+    "escalated": false,
+    "resolution_time_hours": 34.8
+  },
+  {
+    "record_id": "OLA-1008",
+    "category": "Technical Issue",
+    "status": "Open",
+    "severity": "P1",
+    "days_since_created": 21,
+    "escalated": false,
+    "resolution_time_hours": 2.7
+  },
+  {
+    "record_id": "OLA-1009",
+    "category": "Billing",
+    "status": "In Progress",
+    "severity": "P2",
+    "days_since_created": 8,
+    "escalated": false,
+    "resolution_time_hours": 16.6
+  },
+  {
+    "record_id": "OLA-1010",
+    "category": "Billing",
+    "status": "In Progress",
+    "severity": "P3",
+    "days_since_created": 22,
+    "escalated": false,
+    "resolution_time_hours": 27.4
+  },
+  {
+    "record_id": "OLA-1011",
+    "category": "Account Access",
+    "status": "Open",
+    "severity": "P3",
+    "days_since_created": 5,
+    "escalated": false,
+    "resolution_time_hours": 15.6
+  },
+  {
+    "record_id": "OLA-1012",
+    "category": "General Inquiry",
+    "status": "Resolved",
+    "severity": "P2",
+    "days_since_created": 10,
+    "escalated": false,
+    "resolution_time_hours": 15.7
+  },
+  {
+    "record_id": "OLA-1013",
+    "category": "Billing",
+    "status": "Open",
+    "severity": "P2",
+    "days_since_created": 8,
+    "escalated": true,
+    "resolution_time_hours": 17.8
+  },
+  {
+    "record_id": "OLA-1014",
+    "category": "Account Access",
+    "status": "Resolved",
+    "severity": "P2",
+    "days_since_created": 15,
+    "escalated": false,
+    "resolution_time_hours": 17.9
+  },
+  {
+    "record_id": "OLA-1015",
+    "category": "Technical Issue",
+    "status": "In Progress",
+    "severity": "P2",
+    "days_since_created": 17,
+    "escalated": false,
+    "resolution_time_hours": 15.3
+  },
+  {
+    "record_id": "OLA-1016",
+    "category": "Technical Issue",
+    "status": "Resolved",
+    "severity": "P3",
+    "days_since_created": 4,
+    "escalated": false,
+    "resolution_time_hours": 10.0
+  },
+  {
+    "record_id": "OLA-1017",
+    "category": "Billing",
+    "status": "Open",
+    "severity": "P3",
+    "days_since_created": 25,
+    "escalated": false,
+    "resolution_time_hours": 25.8
+  },
+  {
+    "record_id": "OLA-1018",
+    "category": "Technical Issue",
+    "status": "Resolved",
+    "severity": "P3",
+    "days_since_created": 8,
+    "escalated": false,
+    "resolution_time_hours": 34.1
+  },
+  {
+    "record_id": "OLA-1019",
+    "category": "Billing",
+    "status": "Resolved",
+    "severity": "P3",
+    "days_since_created": 17,
+    "escalated": false,
+    "resolution_time_hours": 31.2
+  },
+  {
+    "record_id": "OLA-1020",
+    "category": "Technical Issue",
+    "status": "In Progress",
+    "severity": "P2",
+    "days_since_created": 0,
+    "escalated": false,
+    "resolution_time_hours": 17.3
+  },
+  {
+    "record_id": "OLA-1021",
+    "category": "Billing",
+    "status": "Escalated",
+    "severity": "P2",
+    "days_since_created": 29,
+    "escalated": true,
+    "resolution_time_hours": 5.3
+  },
+  {
+    "record_id": "OLA-1022",
+    "category": "Account Access",
+    "status": "Closed",
+    "severity": "P3",
+    "days_since_created": 6,
+    "escalated": false,
+    "resolution_time_hours": 31.0
+  },
+  {
+    "record_id": "OLA-1023",
+    "category": "Account Access",
+    "status": "Resolved",
+    "severity": "P3",
+    "days_since_created": 0,
+    "escalated": false,
+    "resolution_time_hours": 22.4
+  },
+  {
+    "record_id": "OLA-1024",
+    "category": "Billing",
+    "status": "In Progress",
+    "severity": "P4",
+    "days_since_created": 25,
+    "escalated": false,
+    "resolution_time_hours": 27.0
+  },
+  {
+    "record_id": "OLA-1025",
+    "category": "General Inquiry",
+    "status": "Closed",
+    "severity": "P1",
+    "days_since_created": 15,
+    "escalated": false,
+    "resolution_time_hours": 6.3
+  },
+  {
+    "record_id": "OLA-1026",
+    "category": "Account Access",
+    "status": "Open",
+    "severity": "P3",
+    "days_since_created": 30,
+    "escalated": false,
+    "resolution_time_hours": 15.5
+  },
+  {
+    "record_id": "OLA-1027",
+    "category": "General Inquiry",
+    "status": "Escalated",
+    "severity": "P2",
+    "days_since_created": 17,
+    "escalated": true,
+    "resolution_time_hours": 15.4
+  },
+  {
+    "record_id": "OLA-1028",
+    "category": "Product Defect",
+    "status": "Resolved",
+    "severity": "P3",
+    "days_since_created": 21,
+    "escalated": false,
+    "resolution_time_hours": 20.9
+  },
+  {
+    "record_id": "OLA-1029",
+    "category": "Account Access",
+    "status": "Open",
+    "severity": "P2",
+    "days_since_created": 10,
+    "escalated": true,
+    "resolution_time_hours": 12.2
+  },
+  {
+    "record_id": "OLA-1030",
+    "category": "Account Access",
+    "status": "Open",
+    "severity": "P3",
+    "days_since_created": 1,
+    "escalated": false,
+    "resolution_time_hours": 35.4
+  },
+  {
+    "record_id": "OLA-1031",
+    "category": "General Inquiry",
+    "status": "Open",
+    "severity": "P2",
+    "days_since_created": 21,
+    "escalated": false,
+    "resolution_time_hours": 12.0
+  },
+  {
+    "record_id": "OLA-1032",
+    "category": "Product Defect",
+    "status": "Closed",
+    "severity": "P3",
+    "days_since_created": 7,
+    "escalated": false,
+    "resolution_time_hours": 32.4
+  },
+  {
+    "record_id": "OLA-1033",
+    "category": "Billing",
+    "status": "Open",
+    "severity": "P3",
+    "days_since_created": 13,
+    "escalated": false,
+    "resolution_time_hours": 34.2
+  },
+  {
+    "record_id": "OLA-1034",
+    "category": "Billing",
+    "status": "Resolved",
+    "severity": "P3",
+    "days_since_created": 1,
+    "escalated": false,
+    "resolution_time_hours": 17.8
+  },
+  {
+    "record_id": "OLA-1035",
+    "category": "General Inquiry",
+    "status": "In Progress",
+    "severity": "P2",
+    "days_since_created": 14,
+    "escalated": false,
+    "resolution_time_hours": 6.5
+  },
+  {
+    "record_id": "OLA-1036",
+    "category": "Technical Issue",
+    "status": "Closed",
+    "severity": "P1",
+    "days_since_created": 25,
+    "escalated": false,
+    "resolution_time_hours": 4.1
+  },
+  {
+    "record_id": "OLA-1037",
+    "category": "Billing",
+    "status": "Closed",
+    "severity": "P4",
+    "days_since_created": 2,
+    "escalated": false,
+    "resolution_time_hours": 96.0
+  },
+  {
+    "record_id": "OLA-1038",
+    "category": "Billing",
+    "status": "Escalated",
+    "severity": "P2",
+    "days_since_created": 12,
+    "escalated": true,
+    "resolution_time_hours": 17.7
+  },
+  {
+    "record_id": "OLA-1039",
+    "category": "Billing",
+    "status": "Open",
+    "severity": "P3",
+    "days_since_created": 29,
+    "escalated": false,
+    "resolution_time_hours": 21.4
+  },
+  {
+    "record_id": "OLA-1040",
+    "category": "Technical Issue",
+    "status": "Closed",
+    "severity": "P4",
+    "days_since_created": 17,
+    "escalated": false,
+    "resolution_time_hours": 67.2
+  },
+  {
+    "record_id": "OLA-1041",
+    "category": "Billing",
+    "status": "In Progress",
+    "severity": "P1",
+    "days_since_created": 23,
+    "escalated": false,
+    "resolution_time_hours": 5.1
+  },
+  {
+    "record_id": "OLA-1042",
+    "category": "Billing",
+    "status": "Resolved",
+    "severity": "P3",
+    "days_since_created": 27,
+    "escalated": false,
+    "resolution_time_hours": 9.0
+  },
+  {
+    "record_id": "OLA-1043",
+    "category": "Account Access",
+    "status": "Closed",
+    "severity": "P1",
+    "days_since_created": 2,
+    "escalated": false,
+    "resolution_time_hours": 2.4
+  },
+  {
+    "record_id": "OLA-1044",
+    "category": "Billing",
+    "status": "Closed",
+    "severity": "P2",
+    "days_since_created": 19,
+    "escalated": true,
+    "resolution_time_hours": 4.9
+  },
+  {
+    "record_id": "OLA-1045",
+    "category": "Account Access",
+    "status": "Resolved",
+    "severity": "P2",
+    "days_since_created": 8,
+    "escalated": false,
+    "resolution_time_hours": 14.8
+  },
+  {
+    "record_id": "OLA-1046",
+    "category": "Billing",
+    "status": "In Progress",
+    "severity": "P3",
+    "days_since_created": 9,
+    "escalated": false,
+    "resolution_time_hours": 36.2
+  },
+  {
+    "record_id": "OLA-1047",
+    "category": "General Inquiry",
+    "status": "Open",
+    "severity": "P3",
+    "days_since_created": 18,
+    "escalated": false,
+    "resolution_time_hours": 9.5
+  },
+  {
+    "record_id": "OLA-1048",
+    "category": "Billing",
+    "status": "In Progress",
+    "severity": "P4",
+    "days_since_created": 28,
+    "escalated": true,
+    "resolution_time_hours": 44.5
+  },
+  {
+    "record_id": "OLA-1049",
+    "category": "Technical Issue",
+    "status": "Escalated",
+    "severity": "P3",
+    "days_since_created": 9,
+    "escalated": true,
+    "resolution_time_hours": 26.3
+  },
+  {
+    "record_id": "OLA-1050",
+    "category": "General Inquiry",
+    "status": "Resolved",
+    "severity": "P1",
+    "days_since_created": 26,
+    "escalated": false,
+    "resolution_time_hours": 6.0
+  }
+]

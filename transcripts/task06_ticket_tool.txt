@@ -1,0 +1,182 @@
+================================================================================
+TASK 6: TICKET LOOKUP TOOL & ESCALATION SCORE DEMO
+================================================================================
+
+--- A. ESCALATION FORMULA & JUSTIFICATION ---
+Weight Flag (escalated) : 0.6
+Weight Age (days / 30)  : 0.4
+Activity Factors        : {'Open': 1.0, 'In Progress': 1.0, 'Escalated': 1.0, 'Resolved': 0.4, 'Closed': 0.0}
+Dataset P80 Ticket Age  : 24.2 days
+Threshold Formula       : ESCALATION_THRESHOLD = 0.4 × P80(days_since_created) / 30 = 0.4 × 24.2 / 30 = 0.32
+Justification:
+  'ESCALATION_THRESHOLD = 0.4 × P80(days_since_created) / 30 = 0.4 × 24.2 / 30 = 0.32.
+   An active non-escalated ticket crosses only when older than the 80th-percentile age of our data;
+   every active escalated ticket always crosses (0.6 > 0.32); closed tickets never cross.'
+
+--- B. SAMPLE LOOKUPS FROM DATASET ---
+
+[Active Escalated Ticket Lookup]:
+{
+  "found": true,
+  "record_id": "OLA-1005",
+  "category": "Technical Issue",
+  "severity": "P4",
+  "status": "Open",
+  "resolution_time_hours": 57.2,
+  "days_since_created": 10,
+  "escalated": true,
+  "escalation_score": 0.733,
+  "escalation_recommended": true,
+  "score_explanation": "0.6*1 + 0.4*(10/30) = 0.733; status Open -> activity 1.0; final 0.733 > threshold 0.32"
+}
+
+[Active Non-Escalated Old (>24d) Ticket Lookup]:
+{
+  "found": true,
+  "record_id": "OLA-1007",
+  "category": "General Inquiry",
+  "severity": "P3",
+  "status": "In Progress",
+  "resolution_time_hours": 34.8,
+  "days_since_created": 26,
+  "escalated": false,
+  "escalation_score": 0.347,
+  "escalation_recommended": true,
+  "score_explanation": "0.6*0 + 0.4*(26/30) = 0.347; status In Progress -> activity 1.0; final 0.347 > threshold 0.32"
+}
+
+[Active Non-Escalated Young (<=10d) Ticket Lookup]:
+{
+  "found": true,
+  "record_id": "OLA-1001",
+  "category": "Account Access",
+  "severity": "P2",
+  "status": "Open",
+  "resolution_time_hours": 5.2,
+  "days_since_created": 7,
+  "escalated": false,
+  "escalation_score": 0.093,
+  "escalation_recommended": false,
+  "score_explanation": "0.6*0 + 0.4*(7/30) = 0.093; status Open -> activity 1.0; final 0.093 <= threshold 0.32"
+}
+
+[Resolved Ticket Lookup]:
+{
+  "found": true,
+  "record_id": "OLA-1002",
+  "category": "Product Defect",
+  "severity": "P3",
+  "status": "Resolved",
+  "resolution_time_hours": 14.0,
+  "days_since_created": 1,
+  "escalated": true,
+  "escalation_score": 0.245,
+  "escalation_recommended": false,
+  "score_explanation": "0.6*1 + 0.4*(1/30) = 0.613; status Resolved -> activity 0.4; final 0.245 <= threshold 0.32"
+}
+
+[Closed Ticket Lookup]:
+{
+  "found": true,
+  "record_id": "OLA-1022",
+  "category": "Account Access",
+  "severity": "P3",
+  "status": "Closed",
+  "resolution_time_hours": 31.0,
+  "days_since_created": 6,
+  "escalated": false,
+  "escalation_score": 0.0,
+  "escalation_recommended": false,
+  "score_explanation": "0.6*0 + 0.4*(6/30) = 0.080; status Closed -> activity 0.0; final 0.000 <= threshold 0.32"
+}
+
+--- C. ERROR HANDLING & NORMALIZATION ---
+
+Case: Whitespace & Lowercase (Input: 'ola-1001 '):
+{
+  "found": true,
+  "record_id": "OLA-1001",
+  "category": "Account Access",
+  "severity": "P2",
+  "status": "Open",
+  "resolution_time_hours": 5.2,
+  "days_since_created": 7,
+  "escalated": false,
+  "escalation_score": 0.093,
+  "escalation_recommended": false,
+  "score_explanation": "0.6*0 + 0.4*(7/30) = 0.093; status Open -> activity 1.0; final 0.093 <= threshold 0.32"
+}
+
+Case: Ticket Not Found (Input: 'OLA-9999'):
+{
+  "found": false,
+  "record_id": "OLA-9999",
+  "error": "TICKET_NOT_FOUND"
+}
+
+Case: Invalid Format (Input: 'hello'):
+{
+  "found": false,
+  "record_id": "hello",
+  "error": "INVALID_ID_FORMAT"
+}
+
+--- D. SCORE DISTRIBUTION OVER ALL 50 TICKETS ---
+Min Score    : 0.000
+Median Score : 0.142
+Max Score    : 0.987
+
+Text Histogram (0.1 bins):
+  [0.0 - 0.1) : 21 #####################
+  [0.1 - 0.2) :  7 #######
+  [0.2 - 0.3) :  7 #######
+  [0.3 - 0.4) :  6 ######
+  [0.4 - 0.5) :  1 #
+  [0.5 - 0.6) :  0 
+  [0.6 - 0.7) :  0 
+  [0.7 - 0.8) :  5 #####
+  [0.8 - 0.9) :  1 #
+  [0.9 - 1.0) :  2 ##
+
+Tickets above threshold (0.32): 13/50 (26.0%)
+
+Recommended Tickets for Escalation:
+  - OLA-1005 | Status: Open         | Score: 0.733 | Severity: P4
+  - OLA-1007 | Status: In Progress  | Score: 0.347 | Severity: P3
+  - OLA-1013 | Status: Open         | Score: 0.707 | Severity: P2
+  - OLA-1017 | Status: Open         | Score: 0.333 | Severity: P3
+  - OLA-1021 | Status: Escalated    | Score: 0.987 | Severity: P2
+  - OLA-1024 | Status: In Progress  | Score: 0.333 | Severity: P4
+  - OLA-1026 | Status: Open         | Score: 0.400 | Severity: P3
+  - OLA-1027 | Status: Escalated    | Score: 0.827 | Severity: P2
+  - OLA-1029 | Status: Open         | Score: 0.733 | Severity: P2
+  - OLA-1038 | Status: Escalated    | Score: 0.760 | Severity: P2
+  - OLA-1039 | Status: Open         | Score: 0.387 | Severity: P3
+  - OLA-1048 | Status: In Progress  | Score: 0.973 | Severity: P4
+  - OLA-1049 | Status: Escalated    | Score: 0.720 | Severity: P3
+
+--- E. CREWAI BASETOOL WRAPPER EXECUTION ---
+
+Executing TicketStatusTool.run('OLA-1001')...
+Tool Output: {"found": true, "record_id": "OLA-1001", "category": "Account Access", "severity": "P2", "status": "Open", "resolution_time_hours": 5.2, "days_since_created": 7, "escalated": false, "escalation_score": 0.093, "escalation_recommended": false, "score_explanation": "0.6*0 + 0.4*(7/30) = 0.093; status Open -> activity 1.0; final 0.093 <= threshold 0.32"}
+
+Executing RagLookupTool.run('When do service credits expire?')...
+Tool Output: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+
+tool_calls counter: 2
+TOOL_CALL_LOG: [
+  {
+    "tool": "check_support_ticket_status",
+    "args": {
+      "record_id": "OLA-1001"
+    }
+  },
+  {
+    "tool": "rag_lookup",
+    "args": {
+      "query": "When do service credits expire?"
+    }
+  }
+]
+
+Status: TASK 6 COMPLETE & VERIFIED ✓

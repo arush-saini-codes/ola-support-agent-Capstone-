@@ -1,0 +1,9 @@
+.venv/
+.venv_check/
+__pycache__/
+.pytest_cache/
+chroma_db/
+logs/*.jsonl
+!logs/sample_requests.jsonl
+.env
+*.log

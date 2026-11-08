@@ -1,0 +1,514 @@
+================================================================================
+TASK 15: PER-REQUEST BUDGET CAPS & TOKEN GOVERNANCE DEMO
+================================================================================
+
+--- 1. Token Budget Calibration Summary ---
+Measured token consumption across standard query types:
+  - Policy query: 2,727 tokens
+  - Ticket query: 2,504 tokens
+  - Mixed query:  4,586 tokens (peak consumption)
+
+Chosen Governance Caps:
+  - MAX_INPUT_TOKENS:   256 tokens (pre-flight guard)
+  - MAX_REQUEST_TOKENS: 7000 tokens (1.5 * 4,586 = 6,879 -> 7,000 in-flight guard)
+  - Cost Rate:          Rs 0.05 per 1,000 tokens
+--------------------------------------------------------------------------------
+
+--- 2. Normal Request Execution (Under Budget) ---
+Query: "When do service credits expire?"
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: d86da648-c759-41e1-847d-7491db7006cf                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│  ID: cd2ed95d-b547-4609-ba63-1ce92edfe869                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "When do service credits expire?"}
+┌────────────────────── 🔧 Tool Execution Started (#1) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "When do service credits expire?"}                         │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#1) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "All issued credits expire exactly 90 days from the     │
+│  credit timestamp and are strictly non-transferable and not redeemable for  │
+│  cash withdrawals. [Source: 08_service_credits]", "sources":                │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "All issued credits expire exactly 90 days from the credit      │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source: 08_service_credits]", "sources":                     │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "All issued credits expire exactly 90 days from the credit      │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source: 08_service_credits]", "sources":                     │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│  ID: 227261b5-d6c5-42d0-bdbd-ea68bd1044e2                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]","intent":"policy","sources":["08_service_credits"],"ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"All issued credits expire exactly 90 days from the credit       │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source:                                                      │
+│  08_service_credits]","intent":"policy","sources":["08_service_credits"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: d86da648-c759-41e1-847d-7491db7006cf                                   │
+│  Final Output: {"answer":"All issued credits expire exactly 90 days from    │
+│  the credit timestamp and are strictly non-transferable and not redeemable  │
+│  for cash withdrawals. [Source:                                             │
+│  08_service_credits]","intent":"policy","sources":["08_service_credits"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+Status:      ok ✓
+Tokens Used: 2727 / 7000 (Cap)
+Cost INR:    Rs 0.1363
+Answer:      All issued credits expire exactly 90 days from the credit timestamp and are stri...
+
+--- 3. Oversized Request (Pre-Flight Rejection) ---
+Input Length:      6003 characters
+Estimated Tokens:  1501 tokens vs MAX_INPUT_TOKENS (256)
+Status:            rejected ✓
+Pipeline Answer:   Input exceeds maximum allowed token length.
+Notional Cost:     Rs 0.0000
+Counter Verification (Zero LLM / Tool / Generation Work):
+  crew_llm_calls:   3 -> 3 (delta: 0)
+  review_llm_calls: 2 -> 2 (delta: 0)
+  tool_calls:       1 -> 1 (delta: 0)
+  generation_calls: 2 -> 2 (delta: 0)
+
+--- 4. In-Flight Budget Abort Demo (Cap = 3000 Tokens on Mixed Query) ---
+Query: "Check ticket OLA-1027 and tell me its resolution SLA" with in-flight request_cap = 3000 tokens
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: 46bef091-77ca-4169-8030-5cae78adde9a                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Look up the ticket referenced in: [[QUERY]]Check ticket OLA-1027     │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│  ID: 0560c393-f86d-4b1f-9741-28b316825fa5                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Task: Look up the ticket referenced in: [[QUERY]]Check ticket OLA-1027     │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - lookup]
+Thought: I should use check_support_ticket_status.
+Action: check_support_ticket_status
+Action Input: {"record_id": "OLA-1027"}
+┌────────────────────── 🔧 Tool Execution Started (#1) ───────────────────────┐
+│                                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Args: {"record_id": "OLA-1027"}                                            │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#1) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Output: {"found": true, "record_id": "OLA-1027", "category": "General      │
+│  Inquiry", "severity": "P2", "status": "Escalated",                         │
+│  "resolution_time_hours": 15.4, "days_since_created": 17, "escalated":      │
+│  true, "escalation_score": 0.827, "escalation_recommended": true,           │
+│  "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated ->     │
+│  activity 1.0; final 0.827 > threshold 0.32"}                               │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"found": true, "record_id": "OLA-1027", "category": "General Inquiry",    │
+│  "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4,    │
+│  "days_since_created": 17, "escalated": true, "escalation_score": 0.827,    │
+│  "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30)  │
+│  = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+
+[ReAct Trace - lookup]
+Observation: {"found": true, "record_id": "OLA-1027", "category": "General Inquiry", "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4, "days_since_created": 17, "escalated": true, "escalation_score": 0.827, "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}
+Thought: I now know the final answer
+Final Answer: {"found": true, "record_id": "OLA-1027", "category": "General Inquiry", "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4, "days_since_created": 17, "escalated": true, "escalation_score": 0.827, "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"found": true, "record_id": "OLA-1027", "category": "General Inquiry",    │
+│  "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4,    │
+│  "days_since_created": 17, "escalated": true, "escalation_score": 0.827,    │
+│  "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30)  │
+│  = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Look up the ticket referenced in: [[QUERY]]Check ticket OLA-1027     │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]Check ticket OLA-1027 and     │
+│  tell me its resolution SLA[[/QUERY]]                                       │
+│  ID: 19fbf2b4-6dba-4a5a-8be2-79290127f3b2                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]Check ticket OLA-1027 and     │
+│  tell me its resolution SLA[[/QUERY]]                                       │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "Check  and tell me its resolution SLA (for a P2 General Inquiry ticket open 17 days)"}
+┌────────────────────── 🔧 Tool Execution Started (#2) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "Check  and tell me its resolution SLA (for a P2 General   │
+│  Inquiry ticket open 17 days)"}                                             │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#2) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "High urgency P2 issues require a 1 hour initial        │
+│  response and a 12 hour resolution deadline, while P3 cases mandate a 4     │
+│  hour response and a 24 hour resolution window. For critical P1 tickets,    │
+│  representatives must deliver an initial response within 15 minutes and     │
+│  achieve complete resolution within 4 hours. [Source:                       │
+│  02_sla_by_severity]", "sources": ["02_sla_by_severity"],                   │
+│  "top_similarity": 0.4443, "grounded": true, "context": ["High urgency P2   │
+│  issues require a 1 hour initial response and a 12 hour resolution          │
+│  deadline, while P3 cases mandate a 4 hour response and a 24 hour           │
+│  resolution window.", "For critical P1 tickets, representatives must        │
+│  deliver an initial response within 15 minutes and achieve complete         │
+│  resolution within 4 hours.", "Routine P4 requests are allotted a 24 hour   │
+│  initial contact window and a 72 hour resolution target."],                 │
+│  "threshold_used": 0.41}                                                    │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "High urgency P2 issues require a 1 hour initial response and   │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window. For critical P1 tickets, representatives  │
+│  must deliver an initial response within 15 minutes and achieve complete    │
+│  resolution within 4 hours. [Source: 02_sla_by_severity]", "sources":       │
+│  ["02_sla_by_severity"], "top_similarity": 0.4443, "grounded": true,        │
+│  "context": ["High urgency P2 issues require a 1 hour initial response and  │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window.", "For critical P1 tickets,               │
+│  representatives must deliver an initial response within 15 minutes and     │
+│  achieve complete resolution within 4 hours.", "Routine P4 requests are     │
+│  allotted a 24 hour initial contact window and a 72 hour resolution         │
+│  target."], "threshold_used": 0.41}                                         │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window. For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]", "sources": ["02_sla_by_severity"], "top_similarity": 0.4443, "grounded": true, "context": ["High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window.", "For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours.", "Routine P4 requests are allotted a 24 hour initial contact window and a 72 hour resolution target."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window. For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]", "sources": ["02_sla_by_severity"], "top_similarity": 0.4443, "grounded": true, "context": ["High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window.", "For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours.", "Routine P4 requests are allotted a 24 hour initial contact window and a 72 hour resolution target."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "High urgency P2 issues require a 1 hour initial response and   │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window. For critical P1 tickets, representatives  │
+│  must deliver an initial response within 15 minutes and achieve complete    │
+│  resolution within 4 hours. [Source: 02_sla_by_severity]", "sources":       │
+│  ["02_sla_by_severity"], "top_similarity": 0.4443, "grounded": true,        │
+│  "context": ["High urgency P2 issues require a 1 hour initial response and  │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window.", "For critical P1 tickets,               │
+│  representatives must deliver an initial response within 15 minutes and     │
+│  achieve complete resolution within 4 hours.", "Routine P4 requests are     │
+│  allotted a 24 hour initial contact window and a 72 hour resolution         │
+│  target."], "threshold_used": 0.41}                                         │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]Check ticket OLA-1027 and     │
+│  tell me its resolution SLA[[/QUERY]]                                       │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]Check ticket OLA-1027   │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│  ID: a51d968a-7c34-4ffd-870a-9bb66db75d61                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]Check ticket OLA-1027   │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+[91mAn unknown error occurred. Please check the details below.[0m
+[91mError details: Budget exceeded at stage 'in_flight' on 'MockCrewLLM(composer)': 2453 tokens crossed cap of 3000 (notional cost: Rs 0.1226)[0m
+[91mAn unknown error occurred. Please check the details below.[0m
+[91mError details: Budget exceeded at stage 'in_flight' on 'MockCrewLLM(composer)': 2453 tokens crossed cap of 3000 (notional cost: Rs 0.1226)[0m
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]Check ticket OLA-1027   │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+[91mAn unknown error occurred. Please check the details below.[0m
+[91mError details: Budget exceeded at stage 'in_flight' on 'MockCrewLLM(composer)': 2453 tokens crossed cap of 3000 (notional cost: Rs 0.1226)[0m
+[91mAn unknown error occurred. Please check the details below.[0m
+[91mError details: Budget exceeded at stage 'in_flight' on 'MockCrewLLM(composer)': 2453 tokens crossed cap of 3000 (notional cost: Rs 0.1226)[0m
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]Check ticket OLA-1027   │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+[91mAn unknown error occurred. Please check the details below.[0m
+[91mError details: Budget exceeded at stage 'in_flight' on 'MockCrewLLM(composer)': 2453 tokens crossed cap of 3000 (notional cost: Rs 0.1226)[0m
+[91mAn unknown error occurred. Please check the details below.[0m
+[91mError details: Budget exceeded at stage 'in_flight' on 'MockCrewLLM(composer)': 2453 tokens crossed cap of 3000 (notional cost: Rs 0.1226)[0m
+┌────────────────────────────── 📋 Task Failure ──────────────────────────────┐
+│                                                                             │
+│  Task Failed                                                                │
+│  Name: Compose final support response for: [[QUERY]]Check ticket OLA-1027   │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────── Crew Failure ────────────────────────────────┐
+│                                                                             │
+│  Crew Execution Failed                                                      │
+│  Name: crew                                                                 │
+│  ID: 46bef091-77ca-4169-8030-5cae78adde9a                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+Status:            rejected ✓
+Cap:               3000 tokens
+Tokens at Abort:   2453 tokens (must be <= 3000)
+Stage:             in_flight
+Pipeline Answer:   Request aborted: exceeded budget cap of 3000 tokens at stage 'in_flight' on MockCrewLLM(composer).
+Notional Cost:     Rs 0.1226
+Refused Call:      MockCrewLLM(composer)
+
+================================================================================
+TASK 15 BUDGET DEMO COMPLETED SUCCESSFULLY ✓
+================================================================================

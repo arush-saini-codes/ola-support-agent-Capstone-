@@ -1,0 +1,50 @@
+============================================================
+TASK 1: DATASET GENERATION & VALIDATION REPORT
+============================================================
+
+--- 1. DESIGN CONSTANTS ---
+SEED = 42
+N_RECORDS = 50
+CATEGORY_WEIGHTS = {'Billing': 0.28, 'Technical Issue': 0.22, 'Account Access': 0.18, 'Product Defect': 0.14, 'General Inquiry': 0.18}
+STATUS_WEIGHTS = {'Open': 0.2, 'In Progress': 0.22, 'Escalated': 0.1, 'Resolved': 0.28, 'Closed': 0.2}
+SEVERITY_WEIGHTS = {'P1': 0.1, 'P2': 0.25, 'P3': 0.4, 'P4': 0.25}
+SLA_HOURS = {'P1': 4, 'P2': 12, 'P3': 24, 'P4': 72}
+ESCALATED_BASE_PROB = 0.12
+
+--- 2. DISTRIBUTION BREAKDOWN ---
+Category breakdown:
+  - Billing             : 17 (34.0%)
+  - Technical Issue     : 11 (22.0%)
+  - Account Access      : 11 (22.0%)
+  - Product Defect      :  3 (6.0%)
+  - General Inquiry     :  8 (16.0%)
+
+Status breakdown:
+  - Open                : 14 (28.0%)
+  - In Progress         : 12 (24.0%)
+  - Escalated           :  4 (8.0%)
+  - Resolved            : 12 (24.0%)
+  - Closed              :  8 (16.0%)
+
+Severity breakdown:
+  - P1                  :  6 (12.0%)
+  - P2                  : 17 (34.0%)
+  - P3                  : 21 (42.0%)
+  - P4                  :  6 (12.0%)
+
+--- 3. ESCALATION STATS ---
+Total escalated tickets: 10/50 (20.0%)
+
+--- 4. AGE PERCENTILES (days_since_created) ---
+P50 (Median age): 14.5 days
+P80 (80th percentile): 24.2 days
+
+--- 5. VALIDATION BLOCK ---
+[PASS] N >= 40 records                  (Details: 50 records)
+[PASS] Each category >= 3 records       (Details: Min category count = 3)
+[PASS] Each status >= 1 record          (Details: Min status count = 4)
+[PASS] Escalated % in [10, 30]          (Details: 20.0%)
+
+Written 50 tickets to D:\New folder (3)\data\tickets.json
+
+Overall Validation Status: PASS

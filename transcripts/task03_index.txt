@@ -1,0 +1,68 @@
+======================================================================
+TASK 3: CHROMADB INDEXING & SAMPLE RETRIEVAL DEMO
+======================================================================
+
+--- 1. BUILDING INDEXES ---
+Collection 'ola_kb_fixed': 59 chunks indexed
+Collection 'ola_kb_sentence': 50 chunks indexed
+
+--- 2. EXAMPLE CHUNKS ---
+
+[Collection: ola_kb_fixed] (First 2 chunks):
+  ID: 01_ticket_priority::fixed::0
+  Text: Customer support requests are grouped into four standardized urgency classifications: P1 Critical, P2 High, P3 Medium, and P4 Low. A P1 incident involves a severe
+  Metadata: {'doc_id': '01_ticket_priority', 'title': 'Ola Ticket Priority Classification Policy', 'strategy': 'fixed', 'chunk_index': 0}
+
+  ID: 01_ticket_priority::fixed::1
+  Text: P4 Low. A P1 incident involves a severe rider safety incident, an unauthorized payment debited with no ride provided, or a full app outage impacting platform
+  Metadata: {'doc_id': '01_ticket_priority', 'title': 'Ola Ticket Priority Classification Policy', 'strategy': 'fixed', 'chunk_index': 1}
+
+
+[Collection: ola_kb_sentence] (First 2 chunks):
+  ID: 01_ticket_priority::sent::0
+  Text: Customer support requests are grouped into four standardized urgency classifications: P1 Critical, P2 High, P3 Medium, and P4 Low.
+  Metadata: {'doc_id': '01_ticket_priority', 'title': 'Ola Ticket Priority Classification Policy', 'strategy': 'sentence', 'chunk_index': 0}
+
+  ID: 01_ticket_priority::sent::1
+  Text: A P1 incident involves a severe rider safety incident, an unauthorized payment debited with no ride provided, or a full app outage impacting platform accessibility.
+  Metadata: {'doc_id': '01_ticket_priority', 'title': 'Ola Ticket Priority Classification Policy', 'strategy': 'sentence', 'chunk_index': 1}
+
+
+--- 3. SAMPLE QUERY RETRIEVAL ---
+Query: "What is the resolution time for a P1 ticket?"
+
+Retrieval from 'ola_kb_fixed' (Top-3):
+  Rank 1:
+    Chunk ID   : 02_sla_by_severity::fixed::1
+    Doc ID     : 02_sla_by_severity
+    Similarity : 0.7334
+    Text       : For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. High urgency P2 issues
+  Rank 2:
+    Chunk ID   : 02_sla_by_severity::fixed::2
+    Doc ID     : 02_sla_by_severity
+    Similarity : 0.6257
+    Text       : within 4 hours. High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour
+  Rank 3:
+    Chunk ID   : 02_sla_by_severity::fixed::0
+    Doc ID     : 02_sla_by_severity
+    Similarity : 0.5620
+    Text       : Support desk turnaround benchmarks dictate explicit first response and final resolution windows for every severity grade. For critical P1 tickets, representatives
+
+Retrieval from 'ola_kb_sentence' (Top-3):
+  Rank 1:
+    Chunk ID   : 02_sla_by_severity::sent::1
+    Doc ID     : 02_sla_by_severity
+    Similarity : 0.7545
+    Text       : For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours.
+  Rank 2:
+    Chunk ID   : 02_sla_by_severity::sent::2
+    Doc ID     : 02_sla_by_severity
+    Similarity : 0.6000
+    Text       : High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window.
+  Rank 3:
+    Chunk ID   : 02_sla_by_severity::sent::3
+    Doc ID     : 02_sla_by_severity
+    Similarity : 0.5336
+    Text       : Routine P4 requests are allotted a 24 hour initial contact window and a 72 hour resolution target.
+
+Status: BOTH COLLECTIONS BUILT & RETRIEVAL VERIFIED ✓

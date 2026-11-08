@@ -1,0 +1,576 @@
+================================================================================
+TASK 14: AUTOGEN REVIEW STAGE DEMO
+================================================================================
+
+--- AutoGen Team Configuration ---
+Agent Names:               ['policy_compliance_reviewer', 'final_editor']
+Max Turns:                 2 (enforces exactly 1 turn per agent)
+Custom Message Types:      [StructuredMessage[ReviewVerdict]]
+Editor Output Content Type: ReviewVerdict
+--------------------------------------------------------------------------------
+Initial review_llm_calls: 0
+
+================================================================================
+CASE 1: APPROVE POLICY DRAFT (ALL CLAIMS GROUNDED)
+================================================================================
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: 3d7fe0b3-5a29-4b6a-899c-b2bb0fb88d3c                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│  ID: 034e66c6-68e1-44e7-89ed-69d06f394b1b                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "When do service credits expire?"}
+┌────────────────────── 🔧 Tool Execution Started (#1) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "When do service credits expire?"}                         │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#1) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "All issued credits expire exactly 90 days from the     │
+│  credit timestamp and are strictly non-transferable and not redeemable for  │
+│  cash withdrawals. [Source: 08_service_credits]", "sources":                │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "All issued credits expire exactly 90 days from the credit      │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source: 08_service_credits]", "sources":                     │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "All issued credits expire exactly 90 days from the credit      │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source: 08_service_credits]", "sources":                     │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│  ID: 08981208-49ec-4f74-ab97-65ca0cd8876d                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]","intent":"policy","sources":["08_service_credits"],"ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"All issued credits expire exactly 90 days from the credit       │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source:                                                      │
+│  08_service_credits]","intent":"policy","sources":["08_service_credits"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: 3d7fe0b3-5a29-4b6a-899c-b2bb0fb88d3c                                   │
+│  Final Output: {"answer":"All issued credits expire exactly 90 days from    │
+│  the credit timestamp and are strictly non-transferable and not redeemable  │
+│  for cash withdrawals. [Source:                                             │
+│  08_service_credits]","intent":"policy","sources":["08_service_credits"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+Draft Answer:
+All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]
+Context Chunks (3):
+  - All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.
+  - Every generated survey link remains active for customer completion before it permanently expires after 7 days.
+  - Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year.
+
+--- Team Conversation Trace ---
+[user]:
+[[DRAFT]] All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits] [[/DRAFT]]
+[[CONTEXT]]
+All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.
+Every generated survey link remains active for customer completion before it permanently expires after 7 days.
+Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year.
+[[/CONTEXT]]
+
+[policy_compliance_reviewer]:
+ALL CLAIMS SUPPORTED
+
+[final_editor]:
+approved=True final_answer='All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]' reason='All claims supported by retrieved context.'
+
+--- Review Verdict JSON ---
+{
+  "approved": true,
+  "final_answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]",
+  "reason": "All claims supported by retrieved context."
+}
+
+Result: UNCHANGED ✓ (Approved unchanged byte-for-byte, +2 review_llm_calls)
+
+================================================================================
+CASE 2: REVISE UNGROUNDED CLAIM (INJECTED FABRICATED STATEMENT)
+================================================================================
+Draft with Injected Claim:
+All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits] All P4 tickets also receive a Rs 500 service credit.
+
+--- Team Conversation Trace ---
+[user]:
+[[DRAFT]] All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits] All P4 tickets also receive a Rs 500 service credit. [[/DRAFT]]
+[[CONTEXT]]
+All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.
+Every generated survey link remains active for customer completion before it permanently expires after 7 days.
+Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year.
+[[/CONTEXT]]
+
+[policy_compliance_reviewer]:
+UNSUPPORTED: All P4 tickets also receive a Rs 500 service credit.
+
+[final_editor]:
+approved=False final_answer='All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]' reason='Removed unsupported claim(s): All P4 tickets also receive a Rs 500 service credit.'
+
+--- Review Verdict JSON ---
+{
+  "approved": false,
+  "final_answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]",
+  "reason": "Removed unsupported claim(s): All P4 tickets also receive a Rs 500 service credit."
+}
+
+Before: All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits] All P4 tickets also receive a Rs 500 service credit.
+After:  All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]
+
+Result: REVISED ✓ (Rejected hallucination and pruned cleanly, +2 review_llm_calls)
+
+================================================================================
+CASE 3: APPROVE MIXED TICKET + POLICY QUERY
+================================================================================
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: a81a0ac1-1ee0-4fda-9fed-5cfcd3c9b107                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Look up the ticket referenced in: [[QUERY]]Check ticket OLA-1027     │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│  ID: 4f06a9a0-4c8a-40d5-949b-d6da8bd5f930                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Task: Look up the ticket referenced in: [[QUERY]]Check ticket OLA-1027     │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - lookup]
+Thought: I should use check_support_ticket_status.
+Action: check_support_ticket_status
+Action Input: {"record_id": "OLA-1027"}
+┌────────────────────── 🔧 Tool Execution Started (#1) ───────────────────────┐
+│                                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Args: {"record_id": "OLA-1027"}                                            │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#1) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Output: {"found": true, "record_id": "OLA-1027", "category": "General      │
+│  Inquiry", "severity": "P2", "status": "Escalated",                         │
+│  "resolution_time_hours": 15.4, "days_since_created": 17, "escalated":      │
+│  true, "escalation_score": 0.827, "escalation_recommended": true,           │
+│  "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated ->     │
+│  activity 1.0; final 0.827 > threshold 0.32"}                               │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"found": true, "record_id": "OLA-1027", "category": "General Inquiry",    │
+│  "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4,    │
+│  "days_since_created": 17, "escalated": true, "escalation_score": 0.827,    │
+│  "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30)  │
+│  = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+
+[ReAct Trace - lookup]
+Observation: {"found": true, "record_id": "OLA-1027", "category": "General Inquiry", "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4, "days_since_created": 17, "escalated": true, "escalation_score": 0.827, "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}
+Thought: I now know the final answer
+Final Answer: {"found": true, "record_id": "OLA-1027", "category": "General Inquiry", "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4, "days_since_created": 17, "escalated": true, "escalation_score": 0.827, "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"found": true, "record_id": "OLA-1027", "category": "General Inquiry",    │
+│  "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4,    │
+│  "days_since_created": 17, "escalated": true, "escalation_score": 0.827,    │
+│  "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30)  │
+│  = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Look up the ticket referenced in: [[QUERY]]Check ticket OLA-1027     │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]Check ticket OLA-1027 and     │
+│  tell me its resolution SLA[[/QUERY]]                                       │
+│  ID: a3e1dbaf-0018-4fb1-8b3e-3c63bcef5a93                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]Check ticket OLA-1027 and     │
+│  tell me its resolution SLA[[/QUERY]]                                       │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "Check  and tell me its resolution SLA (for a P2 General Inquiry ticket open 17 days)"}
+┌────────────────────── 🔧 Tool Execution Started (#2) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "Check  and tell me its resolution SLA (for a P2 General   │
+│  Inquiry ticket open 17 days)"}                                             │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#2) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "High urgency P2 issues require a 1 hour initial        │
+│  response and a 12 hour resolution deadline, while P3 cases mandate a 4     │
+│  hour response and a 24 hour resolution window. For critical P1 tickets,    │
+│  representatives must deliver an initial response within 15 minutes and     │
+│  achieve complete resolution within 4 hours. [Source:                       │
+│  02_sla_by_severity]", "sources": ["02_sla_by_severity"],                   │
+│  "top_similarity": 0.4443, "grounded": true, "context": ["High urgency P2   │
+│  issues require a 1 hour initial response and a 12 hour resolution          │
+│  deadline, while P3 cases mandate a 4 hour response and a 24 hour           │
+│  resolution window.", "For critical P1 tickets, representatives must        │
+│  deliver an initial response within 15 minutes and achieve complete         │
+│  resolution within 4 hours.", "Routine P4 requests are allotted a 24 hour   │
+│  initial contact window and a 72 hour resolution target."],                 │
+│  "threshold_used": 0.41}                                                    │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "High urgency P2 issues require a 1 hour initial response and   │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window. For critical P1 tickets, representatives  │
+│  must deliver an initial response within 15 minutes and achieve complete    │
+│  resolution within 4 hours. [Source: 02_sla_by_severity]", "sources":       │
+│  ["02_sla_by_severity"], "top_similarity": 0.4443, "grounded": true,        │
+│  "context": ["High urgency P2 issues require a 1 hour initial response and  │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window.", "For critical P1 tickets,               │
+│  representatives must deliver an initial response within 15 minutes and     │
+│  achieve complete resolution within 4 hours.", "Routine P4 requests are     │
+│  allotted a 24 hour initial contact window and a 72 hour resolution         │
+│  target."], "threshold_used": 0.41}                                         │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window. For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]", "sources": ["02_sla_by_severity"], "top_similarity": 0.4443, "grounded": true, "context": ["High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window.", "For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours.", "Routine P4 requests are allotted a 24 hour initial contact window and a 72 hour resolution target."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window. For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]", "sources": ["02_sla_by_severity"], "top_similarity": 0.4443, "grounded": true, "context": ["High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window.", "For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours.", "Routine P4 requests are allotted a 24 hour initial contact window and a 72 hour resolution target."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "High urgency P2 issues require a 1 hour initial response and   │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window. For critical P1 tickets, representatives  │
+│  must deliver an initial response within 15 minutes and achieve complete    │
+│  resolution within 4 hours. [Source: 02_sla_by_severity]", "sources":       │
+│  ["02_sla_by_severity"], "top_similarity": 0.4443, "grounded": true,        │
+│  "context": ["High urgency P2 issues require a 1 hour initial response and  │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window.", "For critical P1 tickets,               │
+│  representatives must deliver an initial response within 15 minutes and     │
+│  achieve complete resolution within 4 hours.", "Routine P4 requests are     │
+│  allotted a 24 hour initial contact window and a 72 hour resolution         │
+│  target."], "threshold_used": 0.41}                                         │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]Check ticket OLA-1027 and     │
+│  tell me its resolution SLA[[/QUERY]]                                       │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]Check ticket OLA-1027   │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│  ID: ce1d5b2a-f566-41b2-bea6-5ad8e5941f9b                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]Check ticket OLA-1027   │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation score 0.827 — escalation recommended.\n\nPolicy: High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window. For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]","intent":"mixed","sources":["02_sla_by_severity"],"ticket":{"record_id":"OLA-1027","category":"General Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"escalation_recommended":true},"grounded":true,"top_similarity":0.4443,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17  │
+│  days ago, resolution time so far 15.4 h. Escalation score 0.827 —          │
+│  escalation recommended.\n\nPolicy: High urgency P2 issues require a 1      │
+│  hour initial response and a 12 hour resolution deadline, while P3 cases    │
+│  mandate a 4 hour response and a 24 hour resolution window. For critical    │
+│  P1 tickets, representatives must deliver an initial response within 15     │
+│  minutes and achieve complete resolution within 4 hours. [Source:           │
+│  02_sla_by_severity]","intent":"mixed","sources":["02_sla_by_severity"],"t  │
+│  icket":{"record_id":"OLA-1027","category":"General                         │
+│  Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.  │
+│  4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"esca  │
+│  lation_recommended":true},"grounded":true,"top_similarity":0.4443,"guardr  │
+│  ail_flags":[]}                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]Check ticket OLA-1027   │
+│  and tell me its resolution SLA[[/QUERY]]                                   │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: a81a0ac1-1ee0-4fda-9fed-5cfcd3c9b107                                   │
+│  Final Output: {"answer":"Ticket OLA-1027 (General Inquiry, P2) is          │
+│  Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation  │
+│  score 0.827 — escalation recommended.\n\nPolicy: High urgency P2 issues    │
+│  require a 1 hour initial response and a 12 hour resolution deadline,       │
+│  while P3 cases mandate a 4 hour response and a 24 hour resolution window.  │
+│  For critical P1 tickets, representatives must deliver an initial response  │
+│  within 15 minutes and achieve complete resolution within 4 hours.          │
+│  [Source:                                                                   │
+│  02_sla_by_severity]","intent":"mixed","sources":["02_sla_by_severity"],"t  │
+│  icket":{"record_id":"OLA-1027","category":"General                         │
+│  Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.  │
+│  4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"esca  │
+│  lation_recommended":true},"grounded":true,"top_similarity":0.4443,"guardr  │
+│  ail_flags":[]}                                                             │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+Mixed Draft Answer:
+Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation score 0.827 — escalation recommended.
+
+Policy: High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window. For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]
+
+--- Review Verdict JSON ---
+{
+  "approved": true,
+  "final_answer": "Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation score 0.827 — escalation recommended.\n\nPolicy: High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window. For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]",
+  "reason": "All claims supported by retrieved context."
+}
+
+Result: UNCHANGED ✓ (Mixed ticket+policy verified against context, +2 review_llm_calls)
+
+================================================================================
+TASK 14 REVIEW DEMO COMPLETED SUCCESSFULLY
+Total review_llm_calls: 0 -> 6 (total delta: +6 calls)
+================================================================================

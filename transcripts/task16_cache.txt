@@ -1,0 +1,409 @@
+================================================================================
+TASK 16: RESPONSE CACHE & INLINE RETRIEVAL OPTIMIZATION DEMO
+================================================================================
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: 859e76af-6d0b-4203-bbe7-1de8b8618118                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│  ID: 808e1a1d-c211-4ed3-b60a-d10bbbe9dd91                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "When do service credits expire?"}
+┌────────────────────── 🔧 Tool Execution Started (#1) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "When do service credits expire?"}                         │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#1) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "All issued credits expire exactly 90 days from the     │
+│  credit timestamp and are strictly non-transferable and not redeemable for  │
+│  cash withdrawals. [Source: 08_service_credits]", "sources":                │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "All issued credits expire exactly 90 days from the credit      │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source: 08_service_credits]", "sources":                     │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "All issued credits expire exactly 90 days from the credit      │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source: 08_service_credits]", "sources":                     │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│  ID: 20cf303d-d62f-483e-a6d5-1c02b49d8bd3                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]","intent":"policy","sources":["08_service_credits"],"ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"All issued credits expire exactly 90 days from the credit       │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source:                                                      │
+│  08_service_credits]","intent":"policy","sources":["08_service_credits"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: 859e76af-6d0b-4203-bbe7-1de8b8618118                                   │
+│  Final Output: {"answer":"All issued credits expire exactly 90 days from    │
+│  the credit timestamp and are strictly non-transferable and not redeemable  │
+│  for cash withdrawals. [Source:                                             │
+│  08_service_credits]","intent":"policy","sources":["08_service_credits"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+--- Section 14.4 Performance & Counter Comparison Table ---
+Request                | crew_llm | tool_calls | gen_calls | review_llm | tokens_used | latency_ms | cache_hit
+--------------------------------------------------------------------------------------------------------------
+1st request (miss)     | +3       | +1         | +2        | +2         | 2727        | 473.6      | False
+2nd (same query - hit) | +0       | +0         | +0        | +0         | 0           | 2.5        | True
+--------------------------------------------------------------------------------------------------------------
+
+1st Answer:
+All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]
+
+2nd Answer:
+All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]
+
+Answer Match Verification: IDENTICAL ✓
+
+================================================================================
+SEPARATE SECTION: CACHE INVALIDATION VIA cache.clear()
+================================================================================
+Stats Before Invalidation: {'entries': 1, 'max_entries': 256, 'hits': 1, 'misses': 1, 'hit_ratio': 0.5}
+Stats After Invalidation:  {'entries': 0, 'max_entries': 256, 'hits': 0, 'misses': 0, 'hit_ratio': 0.0}
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: 5d26ef68-2bac-4750-b052-b5f1f0f2cc4f                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│  ID: 7b44eb92-287f-4037-a717-d3dce5139bc8                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "When do service credits expire?"}
+┌────────────────────── 🔧 Tool Execution Started (#2) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "When do service credits expire?"}                         │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#2) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "All issued credits expire exactly 90 days from the     │
+│  credit timestamp and are strictly non-transferable and not redeemable for  │
+│  cash withdrawals. [Source: 08_service_credits]", "sources":                │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "All issued credits expire exactly 90 days from the credit      │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source: 08_service_credits]", "sources":                     │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "All issued credits expire exactly 90 days from the credit      │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source: 08_service_credits]", "sources":                     │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│  ID: 406f91b1-f511-499f-a11e-4dda884e9524                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]","intent":"policy","sources":["08_service_credits"],"ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"All issued credits expire exactly 90 days from the credit       │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source:                                                      │
+│  08_service_credits]","intent":"policy","sources":["08_service_credits"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: 5d26ef68-2bac-4750-b052-b5f1f0f2cc4f                                   │
+│  Final Output: {"answer":"All issued credits expire exactly 90 days from    │
+│  the credit timestamp and are strictly non-transferable and not redeemable  │
+│  for cash withdrawals. [Source:                                             │
+│  08_service_credits]","intent":"policy","sources":["08_service_credits"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+Subsequent Ask Cache Hit Status: False (Successfully invalidated -> Miss ✓)
+Post-Invalidation Counters Increase:
+  crew_llm_calls delta:   +3 (expected > 0)
+  tool_calls delta:       +1
+  generation_calls delta: +2
+  review_llm_calls delta: +2
+
+================================================================================
+SEPARATE SECTION: LRU CAPACITY EVICTION CHECK
+================================================================================
+Inserted q1, q2 into cache(cap=2): entries = ['q1', 'q2']
+Accessed q1, inserted q3 -> retained entries: ['q1', 'q3']
+LRU Eviction Order: Correctly evicted least recently used item ✓
+
+================================================================================
+TASK 16 CACHE DEMO COMPLETED SUCCESSFULLY ✓
+================================================================================

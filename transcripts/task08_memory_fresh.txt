@@ -1,0 +1,17 @@
+================================================================================
+TASK 08: FRESH SESSION MEMORY (SESSION S2)
+================================================================================
+
+--- Turn 1 ---
+History length before turn: 0 messages (0 turns)
+User Query: What is its resolution SLA?
+Resolved Query: What is its resolution SLA?
+Intent: fallback
+Status: ok
+Answer:
+Which ticket do you mean? Please share the ticket ID (e.g. OLA-1027).
+History length after turn: 2 messages
+
+================================================================================
+SESSION S2 COMPLETED SUCCESSFULLY
+================================================================================

@@ -1,0 +1,1470 @@
+================================================================================
+TASK 11: FASTAPI HTTP & WEBSOCKET ENDPOINTS DEMO
+================================================================================
+
+--- a. GET /health ---
+Status Code: 200
+Response:    {
+  "status": "ok",
+  "mock_llm": true
+}
+
+--- b. POST /ask ---
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: 4c65464c-ede7-4cf2-a6c0-2bef7660f38d                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│  ID: bb5159b6-efec-454c-aef5-2526df9ba549                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "When do service credits expire?"}
+┌────────────────────── 🔧 Tool Execution Started (#1) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "When do service credits expire?"}                         │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#1) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "All issued credits expire exactly 90 days from the     │
+│  credit timestamp and are strictly non-transferable and not redeemable for  │
+│  cash withdrawals. [Source: 08_service_credits]", "sources":                │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "All issued credits expire exactly 90 days from the credit      │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source: 08_service_credits]", "sources":                     │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "All issued credits expire exactly 90 days from the credit      │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source: 08_service_credits]", "sources":                     │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│  ID: 14520ed2-bd4a-4c6a-8f4c-c81f5e395b6b                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]","intent":"policy","sources":["08_service_credits"],"ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"All issued credits expire exactly 90 days from the credit       │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source:                                                      │
+│  08_service_credits]","intent":"policy","sources":["08_service_credits"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: 4c65464c-ede7-4cf2-a6c0-2bef7660f38d                                   │
+│  Final Output: {"answer":"All issued credits expire exactly 90 days from    │
+│  the credit timestamp and are strictly non-transferable and not redeemable  │
+│  for cash withdrawals. [Source:                                             │
+│  08_service_credits]","intent":"policy","sources":["08_service_credits"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+Status Code: 200
+AskResponse JSON:
+{
+  "trace_id": "bab4699c-b99f-4e99-bcf8-94397d72aced",
+  "status": "ok",
+  "answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]",
+  "intent": "policy",
+  "sources": [
+    "08_service_credits"
+  ],
+  "ticket": null,
+  "approved": true,
+  "review_reason": "All claims supported by retrieved context.",
+  "cache_hit": false,
+  "guardrail_flags": [],
+  "tokens_used": 2727,
+  "cost_inr": 0.1363,
+  "latency_ms": 248.28
+}
+
+--- c. POST /add-document & Retrieval Verification ---
+Status Code: 200
+AddDocumentResponse:
+{
+  "doc_id": "13_lost_item_recovery",
+  "chunks_added": 3,
+  "collection": "ola_kb_sentence",
+  "cache_cleared": true
+}
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: c7581ef0-11bb-4689-aeae-d7ec5dc3bb17                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]How long are lost items held  │
+│  at the city hub?[[/QUERY]]                                                 │
+│  ID: 9c50382c-4e4c-45b7-96c9-4988e8a8dfb9                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]How long are lost items held  │
+│  at the city hub?[[/QUERY]]                                                 │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "How long are lost items held at the city hub?"}
+┌────────────────────── 🔧 Tool Execution Started (#2) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "How long are lost items held at the city hub?"}           │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#2) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "Lost property is held securely at the city hub for 30  │
+│  days before disposal. [Source: 13_lost_item_recovery]", "sources":         │
+│  ["13_lost_item_recovery"], "top_similarity": 0.7195, "grounded": true,     │
+│  "context": ["Lost property is held securely at the city hub for 30 days    │
+│  before disposal.", "Items left behind in an Ola cab are logged within 2    │
+│  hours by the driver.", "An L3 operations manager handles any P1            │
+│  emergency, any recognized VIP ticket, or any unresolved ticket open for    │
+│  more than 7 days."], "threshold_used": 0.41}                               │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "Lost property is held securely at the city hub for 30 days     │
+│  before disposal. [Source: 13_lost_item_recovery]", "sources":              │
+│  ["13_lost_item_recovery"], "top_similarity": 0.7195, "grounded": true,     │
+│  "context": ["Lost property is held securely at the city hub for 30 days    │
+│  before disposal.", "Items left behind in an Ola cab are logged within 2    │
+│  hours by the driver.", "An L3 operations manager handles any P1            │
+│  emergency, any recognized VIP ticket, or any unresolved ticket open for    │
+│  more than 7 days."], "threshold_used": 0.41}                               │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "Lost property is held securely at the city hub for 30 days before disposal. [Source: 13_lost_item_recovery]", "sources": ["13_lost_item_recovery"], "top_similarity": 0.7195, "grounded": true, "context": ["Lost property is held securely at the city hub for 30 days before disposal.", "Items left behind in an Ola cab are logged within 2 hours by the driver.", "An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "Lost property is held securely at the city hub for 30 days before disposal. [Source: 13_lost_item_recovery]", "sources": ["13_lost_item_recovery"], "top_similarity": 0.7195, "grounded": true, "context": ["Lost property is held securely at the city hub for 30 days before disposal.", "Items left behind in an Ola cab are logged within 2 hours by the driver.", "An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "Lost property is held securely at the city hub for 30 days     │
+│  before disposal. [Source: 13_lost_item_recovery]", "sources":              │
+│  ["13_lost_item_recovery"], "top_similarity": 0.7195, "grounded": true,     │
+│  "context": ["Lost property is held securely at the city hub for 30 days    │
+│  before disposal.", "Items left behind in an Ola cab are logged within 2    │
+│  hours by the driver.", "An L3 operations manager handles any P1            │
+│  emergency, any recognized VIP ticket, or any unresolved ticket open for    │
+│  more than 7 days."], "threshold_used": 0.41}                               │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]How long are lost items held  │
+│  at the city hub?[[/QUERY]]                                                 │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]How long are lost       │
+│  items held at the city hub?[[/QUERY]]                                      │
+│  ID: 8e477f46-aaa1-45f0-9677-c97a393620d3                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]How long are lost       │
+│  items held at the city hub?[[/QUERY]]                                      │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"Lost property is held securely at the city hub for 30 days before disposal. [Source: 13_lost_item_recovery]","intent":"policy","sources":["13_lost_item_recovery"],"ticket":null,"grounded":true,"top_similarity":0.7195,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"Lost property is held securely at the city hub for 30 days      │
+│  before disposal. [Source:                                                  │
+│  13_lost_item_recovery]","intent":"policy","sources":["13_lost_item_recove  │
+│  ry"],"ticket":null,"grounded":true,"top_similarity":0.7195,"guardrail_fla  │
+│  gs":[]}                                                                    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]How long are lost       │
+│  items held at the city hub?[[/QUERY]]                                      │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: c7581ef0-11bb-4689-aeae-d7ec5dc3bb17                                   │
+│  Final Output: {"answer":"Lost property is held securely at the city hub    │
+│  for 30 days before disposal. [Source:                                      │
+│  13_lost_item_recovery]","intent":"policy","sources":["13_lost_item_recove  │
+│  ry"],"ticket":null,"grounded":true,"top_similarity":0.7195,"guardrail_fla  │
+│  gs":[]}                                                                    │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Ask new doc response:
+{
+  "trace_id": "4593116b-f04b-474e-8ead-3c826c422a44",
+  "status": "ok",
+  "answer": "Lost property is held securely at the city hub for 30 days before disposal. [Source: 13_lost_item_recovery]",
+  "intent": "policy",
+  "sources": [
+    "13_lost_item_recovery"
+  ],
+  "ticket": null,
+  "approved": true,
+  "review_reason": "All claims supported by retrieved context.",
+  "cache_hit": false,
+  "guardrail_flags": [],
+  "tokens_used": 2495,
+  "cost_inr": 0.1248,
+  "latency_ms": 205.38
+}
+
+Cleanup completed. Collection count back to: 50 (must be 50)
+
+--- d. WebSocket Client A (Multi-turn & Disconnect) ---
+[ws_a] Sending Turn 1: 'Check OLA-1027'
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: 7521a504-8dc0-4574-bdbb-f492b265fc0d                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Look up the ticket referenced in: [[QUERY]]Check OLA-1027[[/QUERY]]  │
+│  ID: 40c08fff-cfb2-4815-9b5f-dda01c91a105                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Task: Look up the ticket referenced in: [[QUERY]]Check OLA-1027[[/QUERY]]  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - lookup]
+Thought: I should use check_support_ticket_status.
+Action: check_support_ticket_status
+Action Input: {"record_id": "OLA-1027"}
+┌────────────────────── 🔧 Tool Execution Started (#1) ───────────────────────┐
+│                                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Args: {"record_id": "OLA-1027"}                                            │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#1) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Output: {"found": true, "record_id": "OLA-1027", "category": "General      │
+│  Inquiry", "severity": "P2", "status": "Escalated",                         │
+│  "resolution_time_hours": 15.4, "days_since_created": 17, "escalated":      │
+│  true, "escalation_score": 0.827, "escalation_recommended": true,           │
+│  "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated ->     │
+│  activity 1.0; final 0.827 > threshold 0.32"}                               │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"found": true, "record_id": "OLA-1027", "category": "General Inquiry",    │
+│  "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4,    │
+│  "days_since_created": 17, "escalated": true, "escalation_score": 0.827,    │
+│  "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30)  │
+│  = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+
+[ReAct Trace - lookup]
+Observation: {"found": true, "record_id": "OLA-1027", "category": "General Inquiry", "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4, "days_since_created": 17, "escalated": true, "escalation_score": 0.827, "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}
+Thought: I now know the final answer
+Final Answer: {"found": true, "record_id": "OLA-1027", "category": "General Inquiry", "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4, "days_since_created": 17, "escalated": true, "escalation_score": 0.827, "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"found": true, "record_id": "OLA-1027", "category": "General Inquiry",    │
+│  "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4,    │
+│  "days_since_created": 17, "escalated": true, "escalation_score": 0.827,    │
+│  "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30)  │
+│  = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Look up the ticket referenced in: [[QUERY]]Check OLA-1027[[/QUERY]]  │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]Check                   │
+│  OLA-1027[[/QUERY]]                                                         │
+│  ID: 949c6f5c-b56b-498a-9964-0b49b6044cab                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]Check                   │
+│  OLA-1027[[/QUERY]]                                                         │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation score 0.827 — escalation recommended.","intent":"ticket","sources":[],"ticket":{"record_id":"OLA-1027","category":"General Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"escalation_recommended":true},"grounded":true,"top_similarity":null,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17  │
+│  days ago, resolution time so far 15.4 h. Escalation score 0.827 —          │
+│  escalation                                                                 │
+│  recommended.","intent":"ticket","sources":[],"ticket":{"record_id":"OLA-1  │
+│  027","category":"General                                                   │
+│  Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.  │
+│  4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"esca  │
+│  lation_recommended":true},"grounded":true,"top_similarity":null,"guardrai  │
+│  l_flags":[]}                                                               │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]Check                   │
+│  OLA-1027[[/QUERY]]                                                         │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: 7521a504-8dc0-4574-bdbb-f492b265fc0d                                   │
+│  Final Output: {"answer":"Ticket OLA-1027 (General Inquiry, P2) is          │
+│  Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation  │
+│  score 0.827 — escalation                                                   │
+│  recommended.","intent":"ticket","sources":[],"ticket":{"record_id":"OLA-1  │
+│  027","category":"General                                                   │
+│  Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.  │
+│  4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"esca  │
+│  lation_recommended":true},"grounded":true,"top_similarity":null,"guardrai  │
+│  l_flags":[]}                                                               │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+[ws_a] Turn 1 Full Answer:
+Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation score 0.827 — escalation recommended.
+
+[ws_a] Sending Turn 2: 'What is its resolution SLA?'
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: 32f72795-65ee-42db-8b4f-169e303ce43f                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Look up the ticket referenced in: [[QUERY]]What is its resolution    │
+│  SLA? (ticket OLA-1027)[[/QUERY]]                                           │
+│  ID: 8382a52c-43c2-4b8c-b892-3936d70e1fe9                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Task: Look up the ticket referenced in: [[QUERY]]What is its resolution    │
+│  SLA? (ticket OLA-1027)[[/QUERY]]                                           │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - lookup]
+Thought: I should use check_support_ticket_status.
+Action: check_support_ticket_status
+Action Input: {"record_id": "OLA-1027"}
+┌────────────────────── 🔧 Tool Execution Started (#2) ───────────────────────┐
+│                                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Args: {"record_id": "OLA-1027"}                                            │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#2) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Output: {"found": true, "record_id": "OLA-1027", "category": "General      │
+│  Inquiry", "severity": "P2", "status": "Escalated",                         │
+│  "resolution_time_hours": 15.4, "days_since_created": 17, "escalated":      │
+│  true, "escalation_score": 0.827, "escalation_recommended": true,           │
+│  "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated ->     │
+│  activity 1.0; final 0.827 > threshold 0.32"}                               │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"found": true, "record_id": "OLA-1027", "category": "General Inquiry",    │
+│  "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4,    │
+│  "days_since_created": 17, "escalated": true, "escalation_score": 0.827,    │
+│  "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30)  │
+│  = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+
+[ReAct Trace - lookup]
+Observation: {"found": true, "record_id": "OLA-1027", "category": "General Inquiry", "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4, "days_since_created": 17, "escalated": true, "escalation_score": 0.827, "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}
+Thought: I now know the final answer
+Final Answer: {"found": true, "record_id": "OLA-1027", "category": "General Inquiry", "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4, "days_since_created": 17, "escalated": true, "escalation_score": 0.827, "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"found": true, "record_id": "OLA-1027", "category": "General Inquiry",    │
+│  "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4,    │
+│  "days_since_created": 17, "escalated": true, "escalation_score": 0.827,    │
+│  "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30)  │
+│  = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Look up the ticket referenced in: [[QUERY]]What is its resolution    │
+│  SLA? (ticket OLA-1027)[[/QUERY]]                                           │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]What is its resolution SLA?   │
+│  (ticket OLA-1027)[[/QUERY]]                                                │
+│  ID: 47c52724-4f31-4ef6-9c09-4dc3585316c2                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]What is its resolution SLA?   │
+│  (ticket OLA-1027)[[/QUERY]]                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "What is its resolution SLA? (for a P2 General Inquiry ticket open 17 days)"}
+┌────────────────────── 🔧 Tool Execution Started (#3) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "What is its resolution SLA? (for a P2 General Inquiry     │
+│  ticket open 17 days)"}                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#3) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "High urgency P2 issues require a 1 hour initial        │
+│  response and a 12 hour resolution deadline, while P3 cases mandate a 4     │
+│  hour response and a 24 hour resolution window. For critical P1 tickets,    │
+│  representatives must deliver an initial response within 15 minutes and     │
+│  achieve complete resolution within 4 hours. [Source:                       │
+│  02_sla_by_severity]", "sources": ["02_sla_by_severity"],                   │
+│  "top_similarity": 0.4958, "grounded": true, "context": ["High urgency P2   │
+│  issues require a 1 hour initial response and a 12 hour resolution          │
+│  deadline, while P3 cases mandate a 4 hour response and a 24 hour           │
+│  resolution window.", "For critical P1 tickets, representatives must        │
+│  deliver an initial response within 15 minutes and achieve complete         │
+│  resolution within 4 hours.", "Furthermore, ticket resolution must be       │
+│  assigned to an experienced L2 senior agent at a minimum to safeguard       │
+│  relationship continuity."], "threshold_used": 0.41}                        │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "High urgency P2 issues require a 1 hour initial response and   │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window. For critical P1 tickets, representatives  │
+│  must deliver an initial response within 15 minutes and achieve complete    │
+│  resolution within 4 hours. [Source: 02_sla_by_severity]", "sources":       │
+│  ["02_sla_by_severity"], "top_similarity": 0.4958, "grounded": true,        │
+│  "context": ["High urgency P2 issues require a 1 hour initial response and  │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window.", "For critical P1 tickets,               │
+│  representatives must deliver an initial response within 15 minutes and     │
+│  achieve complete resolution within 4 hours.", "Furthermore, ticket         │
+│  resolution must be assigned to an experienced L2 senior agent at a         │
+│  minimum to safeguard relationship continuity."], "threshold_used": 0.41}   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window. For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]", "sources": ["02_sla_by_severity"], "top_similarity": 0.4958, "grounded": true, "context": ["High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window.", "For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours.", "Furthermore, ticket resolution must be assigned to an experienced L2 senior agent at a minimum to safeguard relationship continuity."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window. For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]", "sources": ["02_sla_by_severity"], "top_similarity": 0.4958, "grounded": true, "context": ["High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window.", "For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours.", "Furthermore, ticket resolution must be assigned to an experienced L2 senior agent at a minimum to safeguard relationship continuity."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "High urgency P2 issues require a 1 hour initial response and   │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window. For critical P1 tickets, representatives  │
+│  must deliver an initial response within 15 minutes and achieve complete    │
+│  resolution within 4 hours. [Source: 02_sla_by_severity]", "sources":       │
+│  ["02_sla_by_severity"], "top_similarity": 0.4958, "grounded": true,        │
+│  "context": ["High urgency P2 issues require a 1 hour initial response and  │
+│  a 12 hour resolution deadline, while P3 cases mandate a 4 hour response    │
+│  and a 24 hour resolution window.", "For critical P1 tickets,               │
+│  representatives must deliver an initial response within 15 minutes and     │
+│  achieve complete resolution within 4 hours.", "Furthermore, ticket         │
+│  resolution must be assigned to an experienced L2 senior agent at a         │
+│  minimum to safeguard relationship continuity."], "threshold_used": 0.41}   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]What is its resolution SLA?   │
+│  (ticket OLA-1027)[[/QUERY]]                                                │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]What is its resolution  │
+│  SLA? (ticket OLA-1027)[[/QUERY]]                                           │
+│  ID: a14f4a26-19fb-45a6-8eb7-86c3f09c3539                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]What is its resolution  │
+│  SLA? (ticket OLA-1027)[[/QUERY]]                                           │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation score 0.827 — escalation recommended.\n\nPolicy: High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window. For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]","intent":"mixed","sources":["02_sla_by_severity"],"ticket":{"record_id":"OLA-1027","category":"General Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"escalation_recommended":true},"grounded":true,"top_similarity":0.4958,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17  │
+│  days ago, resolution time so far 15.4 h. Escalation score 0.827 —          │
+│  escalation recommended.\n\nPolicy: High urgency P2 issues require a 1      │
+│  hour initial response and a 12 hour resolution deadline, while P3 cases    │
+│  mandate a 4 hour response and a 24 hour resolution window. For critical    │
+│  P1 tickets, representatives must deliver an initial response within 15     │
+│  minutes and achieve complete resolution within 4 hours. [Source:           │
+│  02_sla_by_severity]","intent":"mixed","sources":["02_sla_by_severity"],"t  │
+│  icket":{"record_id":"OLA-1027","category":"General                         │
+│  Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.  │
+│  4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"esca  │
+│  lation_recommended":true},"grounded":true,"top_similarity":0.4958,"guardr  │
+│  ail_flags":[]}                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]What is its resolution  │
+│  SLA? (ticket OLA-1027)[[/QUERY]]                                           │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: 32f72795-65ee-42db-8b4f-169e303ce43f                                   │
+│  Final Output: {"answer":"Ticket OLA-1027 (General Inquiry, P2) is          │
+│  Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation  │
+│  score 0.827 — escalation recommended.\n\nPolicy: High urgency P2 issues    │
+│  require a 1 hour initial response and a 12 hour resolution deadline,       │
+│  while P3 cases mandate a 4 hour response and a 24 hour resolution window.  │
+│  For critical P1 tickets, representatives must deliver an initial response  │
+│  within 15 minutes and achieve complete resolution within 4 hours.          │
+│  [Source:                                                                   │
+│  02_sla_by_severity]","intent":"mixed","sources":["02_sla_by_severity"],"t  │
+│  icket":{"record_id":"OLA-1027","category":"General                         │
+│  Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.  │
+│  4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"esca  │
+│  lation_recommended":true},"grounded":true,"top_similarity":0.4958,"guardr  │
+│  ail_flags":[]}                                                             │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+[ws_a] Turn 2 Full Answer:
+Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation score 0.827 — escalation recommended.
+
+Policy: High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window. For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]
+
+[ws_a] Sending Turn 3: 'Who handles it if open more than 7 days?' and closing socket abruptly...
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: 02a086c2-804f-4839-ad9c-d49d616841b7                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+--- Client A (session 'ws_a') Log Events Sequence ---
+[ws_connect]: {
+  "ts": "2026-11-08T15:44:21.592Z",
+  "trace_id": "3cd3257a-afd0-4db0-9d6b-accb1a6c93a3",
+  "channel": "ws",
+  "endpoint": "/ws/chat",
+  "session_id": "ws_a",
+  "event": "ws_connect",
+  "latency_ms": 0.0
+}
+[/ws/chat]: {
+  "trace_id": "2a039f5f-00ac-4da2-9b70-be180a7cb56d",
+  "channel": "ws",
+  "endpoint": "/ws/chat",
+  "session_id": "ws_a",
+  "request_text": "Check OLA-1027",
+  "status": "ok",
+  "intent": "ticket",
+  "cache_hit": false,
+  "guardrail_flags": [],
+  "tokens_used": 2484,
+  "cost_inr": 0.1242,
+  "llm_calls": 5,
+  "tool_calls": 1,
+  "latency_ms": 146.92,
+  "timings_ms": {
+    "guardrails_injection": 0.01,
+    "guardrails_pii": 0.0,
+    "memory_resolution": 2.16,
+    "cache_lookup": 0.01,
+    "crew_execution": 138.17,
+    "schema_validation": 0.01,
+    "groundedness_check": 0.07,
+    "review": 6.43,
+    "total": 146.92
+  },
+  "ts": "2026-11-08T15:44:21.740Z"
+}
+[/ws/chat]: {
+  "trace_id": "38c4a013-dd22-4c4b-81be-aa63d394a5f8",
+  "channel": "ws",
+  "endpoint": "/ws/chat",
+  "session_id": "ws_a",
+  "request_text": "What is its resolution SLA?",
+  "status": "ok",
+  "intent": "mixed",
+  "cache_hit": false,
+  "guardrail_flags": [],
+  "tokens_used": 4608,
+  "cost_inr": 0.2304,
+  "llm_calls": 7,
+  "tool_calls": 2,
+  "latency_ms": 209.75,
+  "timings_ms": {
+    "guardrails_injection": 0.01,
+    "guardrails_pii": 0.0,
+    "memory_resolution": 3.17,
+    "cache_lookup": 0.01,
+    "crew_execution": 168.24,
+    "schema_validation": 0.01,
+    "groundedness_check": 33.05,
+    "review": 5.2,
+    "total": 209.75
+  },
+  "ts": "2026-11-08T15:44:21.951Z"
+}
+[ws_disconnect]: {
+  "ts": "2026-11-08T15:44:21.956Z",
+  "trace_id": "3cd3257a-afd0-4db0-9d6b-accb1a6c93a3",
+  "channel": "ws",
+  "endpoint": "/ws/chat",
+  "session_id": "ws_a",
+  "event": "ws_disconnect",
+  "turns_completed": 2,
+  "latency_ms": 364.21
+}
+
+Client A Disconnect turns_completed = 2
+Explanation: turns_completed is 2 because the client socket disconnected before Turn 3 completed pipeline execution.
+
+--- e. WebSocket Client B & Health Survival Check ---
+[ws_b] Sending: 'When do service credits expire?'
+┌───────────────────────── 🚀 Crew Execution Started ─────────────────────────┐
+│                                                                             │
+│  Crew Execution Started                                                     │
+│  Name: crew                                                                 │
+│  ID: fd156bdc-83db-47ca-aca9-742395816cb3                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Look up the ticket referenced in: [[QUERY]]Who handles it if open    │
+│  more than 7 days? (ticket OLA-1027)[[/QUERY]]                              │
+│  ID: 1e2e588f-dbe4-4eb7-bf37-963f9782b26e                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│  ID: 5b3499c7-b2af-406f-bbce-790d7d1b477e                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Task: Look up the ticket referenced in: [[QUERY]]Who handles it if open    │
+│  more than 7 days? (ticket OLA-1027)[[/QUERY]]                              │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "When do service credits expire?"}
+
+[ReAct Trace - lookup]
+Thought: I should use check_support_ticket_status.
+Action: check_support_ticket_status
+Action Input: {"record_id": "OLA-1027"}
+┌────────────────────── 🔧 Tool Execution Started (#4) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "When do service credits expire?"}                         │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────── 🔧 Tool Execution Started (#3) ───────────────────────┐
+│                                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Args: {"record_id": "OLA-1027"}                                            │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#3) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: check_support_ticket_status                                          │
+│  Output: {"found": true, "record_id": "OLA-1027", "category": "General      │
+│  Inquiry", "severity": "P2", "status": "Escalated",                         │
+│  "resolution_time_hours": 15.4, "days_since_created": 17, "escalated":      │
+│  true, "escalation_score": 0.827, "escalation_recommended": true,           │
+│  "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated ->     │
+│  activity 1.0; final 0.827 > threshold 0.32"}                               │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"found": true, "record_id": "OLA-1027", "category": "General Inquiry",    │
+│  "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4,    │
+│  "days_since_created": 17, "escalated": true, "escalation_score": 0.827,    │
+│  "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30)  │
+│  = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+
+[ReAct Trace - lookup]
+Observation: {"found": true, "record_id": "OLA-1027", "category": "General Inquiry", "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4, "days_since_created": 17, "escalated": true, "escalation_score": 0.827, "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}
+Thought: I now know the final answer
+Final Answer: {"found": true, "record_id": "OLA-1027", "category": "General Inquiry", "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4, "days_since_created": 17, "escalated": true, "escalation_score": 0.827, "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30) = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"found": true, "record_id": "OLA-1027", "category": "General Inquiry",    │
+│  "severity": "P2", "status": "Escalated", "resolution_time_hours": 15.4,    │
+│  "days_since_created": 17, "escalated": true, "escalation_score": 0.827,    │
+│  "escalation_recommended": true, "score_explanation": "0.6*1 + 0.4*(17/30)  │
+│  = 0.827; status Escalated -> activity 1.0; final 0.827 > threshold 0.32"}  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Look up the ticket referenced in: [[QUERY]]Who handles it if open    │
+│  more than 7 days? (ticket OLA-1027)[[/QUERY]]                              │
+│  Agent: Lookup Agent                                                        │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Search the Ola policy KB for: [[QUERY]]Who handles it if open more   │
+│  than 7 days? (ticket OLA-1027)[[/QUERY]]                                   │
+│  ID: d9727900-571a-4635-b347-4c9ebb43c559                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Task: Search the Ola policy KB for: [[QUERY]]Who handles it if open more   │
+│  than 7 days? (ticket OLA-1027)[[/QUERY]]                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Thought: I should use rag_lookup.
+Action: rag_lookup
+Action Input: {"query": "Who handles it if open more than 7 days? (for a P2 General Inquiry ticket open 17 days)"}
+┌────────────────────── 🔧 Tool Execution Started (#5) ───────────────────────┐
+│                                                                             │
+│  Tool: rag_lookup                                                           │
+│  Args: {"query": "Who handles it if open more than 7 days? (for a P2        │
+│  General Inquiry ticket open 17 days)"}                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#5) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "All issued credits expire exactly 90 days from the     │
+│  credit timestamp and are strictly non-transferable and not redeemable for  │
+│  cash withdrawals. [Source: 08_service_credits]", "sources":                │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "All issued credits expire exactly 90 days from the credit      │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source: 08_service_credits]", "sources":                     │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]", "sources": ["08_service_credits"], "top_similarity": 0.6315, "grounded": true, "context": ["All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.", "Every generated survey link remains active for customer completion before it permanently expires after 7 days.", "Customer service records pertaining to financial billing disputes are securely retained for an audit period of 3 years, whereas all other standard ticket categories are maintained for 1 year."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "All issued credits expire exactly 90 days from the credit      │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source: 08_service_credits]", "sources":                     │
+│  ["08_service_credits"], "top_similarity": 0.6315, "grounded": true,        │
+│  "context": ["All issued credits expire exactly 90 days from the credit     │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals.", "Every generated survey link remains active for customer    │
+│  completion before it permanently expires after 7 days.", "Customer         │
+│  service records pertaining to financial billing disputes are securely      │
+│  retained for an audit period of 3 years, whereas all other standard        │
+│  ticket categories are maintained for 1 year."], "threshold_used": 0.41}    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]When do service credits       │
+│  expire?[[/QUERY]]                                                          │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│  ID: d887c0c1-3f89-418c-86d6-ef59088050b1                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]","intent":"policy","sources":["08_service_credits"],"ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"All issued credits expire exactly 90 days from the credit       │
+│  timestamp and are strictly non-transferable and not redeemable for cash    │
+│  withdrawals. [Source:                                                      │
+│  08_service_credits]","intent":"policy","sources":["08_service_credits"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]When do service         │
+│  credits expire?[[/QUERY]]                                                  │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: fd156bdc-83db-47ca-aca9-742395816cb3                                   │
+│  Final Output: {"answer":"All issued credits expire exactly 90 days from    │
+│  the credit timestamp and are strictly non-transferable and not redeemable  │
+│  for cash withdrawals. [Source:                                             │
+│  08_service_credits]","intent":"policy","sources":["08_service_credits"],"  │
+│  ticket":null,"grounded":true,"top_similarity":0.6315,"guardrail_flags":[]  │
+│  }                                                                          │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────── ✅ Tool Execution Completed (#5) ──────────────────────┐
+│                                                                             │
+│  Tool Completed                                                             │
+│  Tool: rag_lookup                                                           │
+│  Output: {"answer": "An L3 operations manager handles any P1 emergency,     │
+│  any recognized VIP ticket, or any unresolved ticket open for more than 7   │
+│  days. If a respondent submits an adverse rating of 2 stars or lower, the   │
+│  ticketing system automatically reopens an investigative follow-up task     │
+│  within 48 hours. [Source: 03_escalation_matrix, 09_feedback_collection]",  │
+│  "sources": ["03_escalation_matrix", "09_feedback_collection"],             │
+│  "top_similarity": 0.5873, "grounded": true, "context": ["An L3 operations  │
+│  manager handles any P1 emergency, any recognized VIP ticket, or any        │
+│  unresolved ticket open for more than 7 days.", "If a respondent submits    │
+│  an adverse rating of 2 stars or lower, the ticketing system automatically  │
+│  reopens an investigative follow-up task within 48 hours.", "Standard P3    │
+│  and P4 inquiries are staffed exclusively between 9 AM and 9 PM Indian      │
+│  Standard Time, Monday through Saturday."], "threshold_used": 0.41}         │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────── Tool Output ────────────────────────────────┐
+│                                                                             │
+│  {"answer": "An L3 operations manager handles any P1 emergency, any         │
+│  recognized VIP ticket, or any unresolved ticket open for more than 7       │
+│  days. If a respondent submits an adverse rating of 2 stars or lower, the   │
+│  ticketing system automatically reopens an investigative follow-up task     │
+│  within 48 hours. [Source: 03_escalation_matrix, 09_feedback_collection]",  │
+│  "sources": ["03_escalation_matrix", "09_feedback_collection"],             │
+│  "top_similarity": 0.5873, "grounded": true, "context": ["An L3 operations  │
+│  manager handles any P1 emergency, any recognized VIP ticket, or any        │
+│  unresolved ticket open for more than 7 days.", "If a respondent submits    │
+│  an adverse rating of 2 stars or lower, the ticketing system automatically  │
+│  reopens an investigative follow-up task within 48 hours.", "Standard P3    │
+│  and P4 inquiries are staffed exclusively between 9 AM and 9 PM Indian      │
+│  Standard Time, Monday through Saturday."], "threshold_used": 0.41}         │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+[ReAct Trace - retrieval]
+Observation: {"answer": "An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days. If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours. [Source: 03_escalation_matrix, 09_feedback_collection]", "sources": ["03_escalation_matrix", "09_feedback_collection"], "top_similarity": 0.5873, "grounded": true, "context": ["An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days.", "If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours.", "Standard P3 and P4 inquiries are staffed exclusively between 9 AM and 9 PM Indian Standard Time, Monday through Saturday."], "threshold_used": 0.41}
+Thought: I now know the final answer
+Final Answer: {"answer": "An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days. If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours. [Source: 03_escalation_matrix, 09_feedback_collection]", "sources": ["03_escalation_matrix", "09_feedback_collection"], "top_similarity": 0.5873, "grounded": true, "context": ["An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days.", "If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours.", "Standard P3 and P4 inquiries are staffed exclusively between 9 AM and 9 PM Indian Standard Time, Monday through Saturday."], "threshold_used": 0.41}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer": "An L3 operations manager handles any P1 emergency, any         │
+│  recognized VIP ticket, or any unresolved ticket open for more than 7       │
+│  days. If a respondent submits an adverse rating of 2 stars or lower, the   │
+│  ticketing system automatically reopens an investigative follow-up task     │
+│  within 48 hours. [Source: 03_escalation_matrix, 09_feedback_collection]",  │
+│  "sources": ["03_escalation_matrix", "09_feedback_collection"],             │
+│  "top_similarity": 0.5873, "grounded": true, "context": ["An L3 operations  │
+│  manager handles any P1 emergency, any recognized VIP ticket, or any        │
+│  unresolved ticket open for more than 7 days.", "If a respondent submits    │
+│  an adverse rating of 2 stars or lower, the ticketing system automatically  │
+│  reopens an investigative follow-up task within 48 hours.", "Standard P3    │
+│  and P4 inquiries are staffed exclusively between 9 AM and 9 PM Indian      │
+│  Standard Time, Monday through Saturday."], "threshold_used": 0.41}         │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Search the Ola policy KB for: [[QUERY]]Who handles it if open more   │
+│  than 7 days? (ticket OLA-1027)[[/QUERY]]                                   │
+│  Agent: Retrieval Agent                                                     │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────── 📋 Task Started ──────────────────────────────┐
+│                                                                             │
+│  Task Started                                                               │
+│  Name: Compose final support response for: [[QUERY]]Who handles it if open  │
+│  more than 7 days? (ticket OLA-1027)[[/QUERY]]                              │
+│  ID: e0fc31df-7215-4fd7-adfb-8ea9f5623b2c                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────── 🤖 Agent Started ──────────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Task: Compose final support response for: [[QUERY]]Who handles it if open  │
+│  more than 7 days? (ticket OLA-1027)[[/QUERY]]                              │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[ReAct Trace - composer]
+Thought: I now know the final answer
+Final Answer: {"answer":"Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation score 0.827 — escalation recommended.\n\nPolicy: An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days. If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours. [Source: 03_escalation_matrix, 09_feedback_collection]","intent":"mixed","sources":["03_escalation_matrix","09_feedback_collection"],"ticket":{"record_id":"OLA-1027","category":"General Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"escalation_recommended":true},"grounded":true,"top_similarity":0.5873,"guardrail_flags":[]}
+[35m[Finalize] todos_count=0, todos_with_results=0[0m
+┌─────────────────────────── ✅ Agent Final Answer ───────────────────────────┐
+│                                                                             │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│  Final Answer:                                                              │
+│  {"answer":"Ticket OLA-1027 (General Inquiry, P2) is Escalated, created 17  │
+│  days ago, resolution time so far 15.4 h. Escalation score 0.827 —          │
+│  escalation recommended.\n\nPolicy: An L3 operations manager handles any    │
+│  P1 emergency, any recognized VIP ticket, or any unresolved ticket open     │
+│  for more than 7 days. If a respondent submits an adverse rating of 2       │
+│  stars or lower, the ticketing system automatically reopens an              │
+│  investigative follow-up task within 48 hours. [Source:                     │
+│  03_escalation_matrix,                                                      │
+│  09_feedback_collection]","intent":"mixed","sources":["03_escalation_matri  │
+│  x","09_feedback_collection"],"ticket":{"record_id":"OLA-1027","category":  │
+│  "General                                                                   │
+│  Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.  │
+│  4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"esca  │
+│  lation_recommended":true},"grounded":true,"top_similarity":0.5873,"guardr  │
+│  ail_flags":[]}                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────── 📋 Task Completion ─────────────────────────────┐
+│                                                                             │
+│  Task Completed                                                             │
+│  Name: Compose final support response for: [[QUERY]]Who handles it if open  │
+│  more than 7 days? (ticket OLA-1027)[[/QUERY]]                              │
+│  Agent: Response Composer                                                   │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+[ws_b] Full Answer:
+All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. [Source: 08_service_credits]
+
+SERVER SURVIVED CLIENT DISCONNECT ✓
+
+--- f. Last Log Lines in requests.jsonl Showing ws_disconnect ---
+┌────────────────────────────── Crew Completion ──────────────────────────────┐
+│                                                                             │
+│  Crew Execution Completed                                                   │
+│  Name: crew                                                                 │
+│  ID: 02a086c2-804f-4839-ad9c-d49d616841b7                                   │
+│  Final Output: {"answer":"Ticket OLA-1027 (General Inquiry, P2) is          │
+│  Escalated, created 17 days ago, resolution time so far 15.4 h. Escalation  │
+│  score 0.827 — escalation recommended.\n\nPolicy: An L3 operations manager  │
+│  handles any P1 emergency, any recognized VIP ticket, or any unresolved     │
+│  ticket open for more than 7 days. If a respondent submits an adverse       │
+│  rating of 2 stars or lower, the ticketing system automatically reopens an  │
+│  investigative follow-up task within 48 hours. [Source:                     │
+│  03_escalation_matrix,                                                      │
+│  09_feedback_collection]","intent":"mixed","sources":["03_escalation_matri  │
+│  x","09_feedback_collection"],"ticket":{"record_id":"OLA-1027","category":  │
+│  "General                                                                   │
+│  Inquiry","severity":"P2","status":"Escalated","resolution_time_hours":15.  │
+│  4,"days_since_created":17,"escalated":true,"escalation_score":0.827,"esca  │
+│  lation_recommended":true},"grounded":true,"top_similarity":0.5873,"guardr  │
+│  ail_flags":[]}                                                             │
+│                                                                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+{"ts": "2026-11-08T15:44:21.956Z", "trace_id": "3cd3257a-afd0-4db0-9d6b-accb1a6c93a3", "channel": "ws", "endpoint": "/ws/chat", "session_id": "ws_a", "event": "ws_disconnect", "turns_completed": 2, "latency_ms": 364.21}
+{"ts": "2026-11-08T15:44:21.967Z", "trace_id": "c4b45b9c-1878-4971-a2d4-f2bda01f0caa", "channel": "ws", "endpoint": "/ws/chat", "session_id": "ws_b", "event": "ws_connect", "latency_ms": 0.0}
+{"trace_id": "025e2e75-0c93-417d-8a89-7ecfc661809e", "channel": "ws", "endpoint": "/ws/chat", "session_id": "ws_b", "request_text": "When do service credits expire?", "status": "ok", "intent": "policy", "cache_hit": false, "guardrail_flags": [], "tokens_used": 2727, "cost_inr": 0.1363, "llm_calls": 10, "tool_calls": 3, "latency_ms": 287.34, "timings_ms": {"guardrails_injection": 0.01, "guardrails_pii": 0.0, "memory_resolution": 3.35, "cache_lookup": 0.01, "crew_execution": 219.45, "schema_validation": 0.01, "groundedness_check": 59.09, "review": 5.36, "total": 287.34}, "ts": "2026-11-08T15:44:22.256Z"}
+{"ts": "2026-11-08T15:44:22.257Z", "trace_id": "c4b45b9c-1878-4971-a2d4-f2bda01f0caa", "channel": "ws", "endpoint": "/ws/chat", "session_id": "ws_b", "event": "ws_disconnect", "turns_completed": 1, "latency_ms": 289.32}
+{"trace_id": "4a77f397-0749-431e-8e60-f6a951843aea", "channel": "http", "endpoint": "/health", "session_id": "system", "request_text": "health check", "status": "ok", "intent": "health", "cache_hit": false, "guardrail_flags": [], "tokens_used": 0, "cost_inr": 0.0, "llm_calls": 0, "tool_calls": 0, "latency_ms": 0.01, "timings_ms": {"total": 0.01}, "ts": "2026-11-08T15:44:22.259Z"}
+┌────────────────────────────── Tracing Status ───────────────────────────────┐
+│                                                                             │
+│  Info: Tracing is disabled.                                                 │
+│                                                                             │
+│  To enable tracing, do any one of these:                                    │
+│  • Set tracing=True in your Crew/Flow code                                  │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
+│  • Run: crewai traces enable                                                │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+TASK 11 API DEMO COMPLETED SUCCESSFULLY ✓
+================================================================================

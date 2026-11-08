@@ -1,0 +1,73 @@
+================================================================================
+TASK 4: GROUNDED EXTRACTIVE GENERATION DEMO
+Target Collection: ola_kb_sentence
+Calibrated Threshold: 0.41
+================================================================================
+
+[Q1 (In-scope)] Query: "What is the resolution time for a P1 ticket?"
+Top-3 Retrieved Chunks:
+  1. [02_sla_by_severity] (sim=0.7545) : For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours.
+  2. [02_sla_by_severity] (sim=0.6000) : High urgency P2 issues require a 1 hour initial response and a 12 hour resolution deadline, while P3 cases mandate a 4 hour response and a 24 hour resolution window.
+  3. [02_sla_by_severity] (sim=0.5336) : Routine P4 requests are allotted a 24 hour initial contact window and a 72 hour resolution target.
+Top Similarity vs Threshold : 0.7545 vs 0.41
+Grounded Flag               : True
+Sources                     : ['02_sla_by_severity']
+Final Answer                : For critical P1 tickets, representatives must deliver an initial response within 15 minutes and achieve complete resolution within 4 hours. [Source: 02_sla_by_severity]
+
+[Q2 (In-scope)] Query: "When do service credits expire and how much credit is given for a P2 SLA breach?"
+Top-3 Retrieved Chunks:
+  1. [08_service_credits] (sim=0.5239) : All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals.
+  2. [02_sla_by_severity] (sim=0.4553) : Any failure to meet these milestones constitutes an SLA breach and automatically triggers escalation to senior supervision.
+  3. [08_service_credits] (sim=0.4300) : Low-severity P4 issues do not qualify for any service credit compensation regardless of elapsed turnaround time.
+Top Similarity vs Threshold : 0.5239 vs 0.41
+Grounded Flag               : True
+Sources                     : ['02_sla_by_severity', '08_service_credits']
+Final Answer                : All issued credits expire exactly 90 days from the credit timestamp and are strictly non-transferable and not redeemable for cash withdrawals. Any failure to meet these milestones constitutes an SLA breach and automatically triggers escalation to senior supervision. [Source: 02_sla_by_severity, 08_service_credits]
+
+[Q3 (In-scope)] Query: "Who handles a ticket that has been open for more than 7 days?"
+Top-3 Retrieved Chunks:
+  1. [03_escalation_matrix] (sim=0.5814) : An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days.
+  2. [09_feedback_collection] (sim=0.5571) : If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours.
+  3. [11_outage_communication] (sim=0.4684) : Incident command prepares and distributes a comprehensive post-incident summary within 48 hours, while all user tickets raised during the outage window are tagged and bulk-resolved.
+Top Similarity vs Threshold : 0.5814 vs 0.41
+Grounded Flag               : True
+Sources                     : ['03_escalation_matrix', '09_feedback_collection']
+Final Answer                : An L3 operations manager handles any P1 emergency, any recognized VIP ticket, or any unresolved ticket open for more than 7 days. If a respondent submits an adverse rating of 2 stars or lower, the ticketing system automatically reopens an investigative follow-up task within 48 hours. [Source: 03_escalation_matrix, 09_feedback_collection]
+
+[Q4 (In-scope)] Query: "A P1 ticket breached its SLA — who handles it and what service credit applies?"
+Top-3 Retrieved Chunks:
+  1. [01_ticket_priority] (sim=0.5217) : A P1 incident involves a severe rider safety incident, an unauthorized payment debited with no ride provided, or a full app outage impacting platform accessibility.
+  2. [01_ticket_priority] (sim=0.5072) : High severity P2 tickets cover billing disputes above Rs 500 or locked rider accounts preventing regular access.
+  3. [08_service_credits] (sim=0.4933) : Credited disbursements to the customer's Ola Money wallet equal Rs 150 for P1 breaches, Rs 100 for P2 delays, and Rs 50 for P3 SLA failures.
+Top Similarity vs Threshold : 0.5217 vs 0.41
+Grounded Flag               : True
+Sources                     : ['01_ticket_priority']
+Final Answer                : A P1 incident involves a severe rider safety incident, an unauthorized payment debited with no ride provided, or a full app outage impacting platform accessibility. High severity P2 tickets cover billing disputes above Rs 500 or locked rider accounts preventing regular access. [Source: 01_ticket_priority]
+
+[Q5 (In-scope)] Query: "A VIP rider complained twice about billing within a month — how is the ticket prioritised?"
+Top-3 Retrieved Chunks:
+  1. [01_ticket_priority] (sim=0.5613) : High severity P2 tickets cover billing disputes above Rs 500 or locked rider accounts preventing regular access.
+  2. [07_repeat_complaints] (sim=0.4830) : A customer submission is formally classified as a repeat grievance when the same user logs another ticket under the identical issue category within 30 calendar days.
+  3. [04_refund_compensation] (sim=0.4698) : Any verified trip fare overcharge is returned directly to the rider's Ola Money wallet within 24 hours, or remitted back to the original payment source within 5 to 7 business days.
+Top Similarity vs Threshold : 0.5613 vs 0.41
+Grounded Flag               : True
+Sources                     : ['01_ticket_priority', '07_repeat_complaints']
+Final Answer                : High severity P2 tickets cover billing disputes above Rs 500 or locked rider accounts preventing regular access. A customer submission is formally classified as a repeat grievance when the same user logs another ticket under the identical issue category within 30 calendar days. [Source: 01_ticket_priority, 07_repeat_complaints]
+
+[OUT-OF-SCOPE] Query: "What's the weather in Mumbai tomorrow?"
+Top-3 Retrieved Chunks:
+  1. [06_business_hours_holidays] (sim=0.2406) : Standard P3 and P4 inquiries are staffed exclusively between 9 AM and 9 PM Indian Standard Time, Monday through Saturday.
+  2. [06_business_hours_holidays] (sim=0.1820) : The countdown on the SLA clock automatically pauses for P3 and P4 tickets throughout recognized national holidays, specifically Republic Day, Independence Day, Gandhi Jayanti, and Diwali.
+  3. [06_business_hours_holidays] (sim=0.1444) : Normal turnaround measurement resumes at nine in the morning on the immediate following operational workday.
+Top Similarity vs Threshold : 0.2406 vs 0.41
+Grounded Flag               : False
+Sources                     : []
+Final Answer                : I don't know — that isn't covered by Ola's support policy knowledge base.
+
+================================================================================
+DEMO VERIFICATION SUMMARY
+================================================================================
+[PASS] 5 in-scope queries produced grounded answers: 5/5
+[PASS] Out-of-scope query triggered fallback refusal: True
+
+Final Task 4 Status: ALL CHECKS PASSED ✓

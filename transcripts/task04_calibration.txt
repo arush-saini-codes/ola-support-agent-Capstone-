@@ -1,0 +1,51 @@
+===========================================================================
+TASK 4 PART 1: SIMILARITY THRESHOLD CALIBRATION
+===========================================================================
+
+===========================================================================
+CALIBRATION FOR COLLECTION: ola_kb_fixed
+===========================================================================
+Type           | Top-1 Doc ID               | Top-1 Sim  | Query
+----------------------------------------------------------------
+IN-SCOPE       | 02_sla_by_severity         | 0.7334     | What is the resolution time for a P1 ticket?
+IN-SCOPE       | 08_service_credits         | 0.6342     | When do service credits expire?
+IN-SCOPE       | 09_feedback_collection     | 0.5475     | Who handles a ticket that has been open for more than 7 days?
+IN-SCOPE       | 12_ticket_data_retention   | 0.6492     | How long are billing dispute tickets retained?
+IN-SCOPE       | 09_feedback_collection     | 0.6630     | When is a CSAT survey sent to the customer?
+OUT-OF-SCOPE   | 06_business_hours_holidays | 0.3149     | What's the weather in Mumbai tomorrow?
+OUT-OF-SCOPE   | 10_vip_handling            | 0.1436     | Recommend a good biryani place in Bangalore
+OUT-OF-SCOPE   | 06_business_hours_holidays | 0.1258     | Who won the cricket world cup in 2011?
+
+--- METRICS FOR ola_kb_fixed ---
+Min In-Scope Similarity    : 0.5475
+Max Out-of-Scope Similarity: 0.3149
+Separation Gap             : 0.2326
+Suggested Threshold (mid)  : 0.43
+[OK] Clean separation! Gap = 0.2326 > 0
+
+===========================================================================
+CALIBRATION FOR COLLECTION: ola_kb_sentence
+===========================================================================
+Type           | Top-1 Doc ID               | Top-1 Sim  | Query
+----------------------------------------------------------------
+IN-SCOPE       | 02_sla_by_severity         | 0.7545     | What is the resolution time for a P1 ticket?
+IN-SCOPE       | 08_service_credits         | 0.6315     | When do service credits expire?
+IN-SCOPE       | 03_escalation_matrix       | 0.5814     | Who handles a ticket that has been open for more than 7 days?
+IN-SCOPE       | 12_ticket_data_retention   | 0.7045     | How long are billing dispute tickets retained?
+IN-SCOPE       | 09_feedback_collection     | 0.6595     | When is a CSAT survey sent to the customer?
+OUT-OF-SCOPE   | 06_business_hours_holidays | 0.2406     | What's the weather in Mumbai tomorrow?
+OUT-OF-SCOPE   | 06_business_hours_holidays | 0.1532     | Recommend a good biryani place in Bangalore
+OUT-OF-SCOPE   | 06_business_hours_holidays | 0.1115     | Who won the cricket world cup in 2011?
+
+--- METRICS FOR ola_kb_sentence ---
+Min In-Scope Similarity    : 0.5814
+Max Out-of-Scope Similarity: 0.2406
+Separation Gap             : 0.3408
+Suggested Threshold (mid)  : 0.41
+[OK] Clean separation! Gap = 0.3408 > 0
+
+===========================================================================
+SUMMARY COMPARISON
+===========================================================================
+Collection ola_kb_fixed        : Min In=0.5475, Max Out=0.3149, Gap=0.2326, Suggested Threshold=0.43
+Collection ola_kb_sentence     : Min In=0.5814, Max Out=0.2406, Gap=0.3408, Suggested Threshold=0.41
