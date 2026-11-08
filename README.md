@@ -115,7 +115,20 @@ Both collections use explicit cosine similarity (`hnsw:space=cosine`, $\text{sim
 2. **`ola_kb_sentence`:** Semantic sentence-level chunking using regex `(?<=[.!?])\s+` (1 sentence per chunk, title excluded). Generated **50 chunks**.
 
 ### Calibration Measurements (`rag/calibrate.py`)
-Tested across 3 in-scope queries and 3 out-of-scope negative probes:
+Tested with 5 in-scope queries and 3 out-of-scope probes, measured on both collections (top-1 cosine similarity):
+
+| Query | Type | Fixed: top-1 doc | Fixed sim | Sentence: top-1 doc | Sentence sim |
+|---|---|---|---|---|---|
+| What is the resolution time for a P1 ticket? | in-scope | 02_sla_by_severity | 0.7334 | 02_sla_by_severity | 0.7545 |
+| When do service credits expire? | in-scope | 08_service_credits | 0.6342 | 08_service_credits | 0.6315 |
+| Who handles a ticket that has been open for more than 7 days? | in-scope | 09_feedback_collection (wrong doc) | 0.5475 | 03_escalation_matrix | 0.5814 |
+| How long are billing dispute tickets retained? | in-scope | 12_ticket_data_retention | 0.6492 | 12_ticket_data_retention | 0.7045 |
+| When is a CSAT survey sent to the customer? | in-scope | 09_feedback_collection | 0.6630 | 09_feedback_collection | 0.6595 |
+| What's the weather in Mumbai tomorrow? | out-of-scope | 06_business_hours_holidays | 0.3149 | 06_business_hours_holidays | 0.2406 |
+| Recommend a good biryani place in Bangalore | out-of-scope | 10_vip_handling | 0.1436 | 06_business_hours_holidays | 0.1532 |
+| Who won the cricket world cup in 2011? | out-of-scope | 06_business_hours_holidays | 0.1258 | 06_business_hours_holidays | 0.1115 |
+
+Untested presets (0.5/0.6/0.7) were not used; each threshold is the midpoint of the gap actually observed.
 
 | Metric | `ola_kb_fixed` | `ola_kb_sentence` |
 |---|---|---|
@@ -182,7 +195,7 @@ escalation_recommended = escalation_score > config.ESCALATION_THRESHOLD
 - **Empirical Validation:** 13 / 50 tickets (26.0%) in the dataset exceed the threshold.
 
 ### Worked Example: Ticket OLA-1027
-- **Ticket Data:** Category: `Account Access`, Severity: `P2`, Status: `Escalated`, `days_since_created`: 17, `escalated`: `True`
+- **Ticket Data:** Category: `General Inquiry`, Severity: `P2`, Status: `Escalated`, `days_since_created`: 17, `escalated`: `True`
 - **Calculation:**
   $$\text{raw} = 0.6 \times 1.0 + 0.4 \times \left(\frac{17}{30.0}\right) = 0.6 + 0.2267 = 0.8267$$
   $$\text{activity\_factor} = 1.0 \quad (\text{status: Escalated})$$
@@ -450,3 +463,4 @@ Evaluated across 15 queries covering all 12 KB policy documents plus 3 edge case
 5. **Eval Case 11 Retrieval Miss:** In evaluation query 11 ("When is an outage declared?"), the top similarity was 0.4069, just below the 0.41 threshold. The groundedness guardrail correctly executed a refusal (`status: refused`), which resulted in 0.0 accuracy for that specific case while maintaining 1.0 safety.
 6. **In-Process Memory:** Session chat histories are stored in-memory (`InMemoryChatMessageHistory`) and do not persist across process restarts.
 7. **Expected Deprecation Warnings:** LangChain emits deprecation warnings regarding `RunnableWithMessageHistory` and `InMemoryChatMessageHistory`; these are expected and preserved per the architectural brief.
+8. **Off-topic second sentence (eval cases 1, 3, 13):** the extractive generator keeps the top-2 sentences when the second is within SECOND_SENTENCE_MARGIN (0.12) of the first. In cases 1, 3 and 13 the second sentence came from a different, less relevant document (e.g. an outage sentence appended to the P1-priority answer), so the judge's accuracy rule (every number must come from the expected doc) scores those cases 0.5. The answers remain fully grounded (grounding 1.0), and the scores are reported as measured rather than tuned.
