@@ -1038,30 +1038,30 @@ The README (Phase 11) must contain, in this order:
 ## 22. Final Acceptance Checklist
 
 **Part 1**
-- [ ] `dataset.py` makes ≥ 40 records; every category ≥ 3; every status ≥ 1; escalated % in [10, 30]; design choices in the README
-- [ ] ≥ 12 KB docs covering all 12 required topics, each 2–5 sentences
-- [ ] Two chunking strategies in two separate ChromaDB collections via `upsert()`, both sensible on a sample query
-- [ ] Threshold calibrated from ≥ 3 in-scope + ≥ 2 out-of-scope measurements, stated in the README
-- [ ] Grounded generation on ≥ 5 in-scope queries + 1 out-of-scope query triggering the fallback
-- [ ] P/R for both collections on the same queries with per-query arithmetic and a numbers-cited recommendation
+- [x] `dataset.py` makes ≥ 40 records; every category ≥ 3; every status ≥ 1; escalated % in [10, 30]; design choices in the README
+- [x] ≥ 12 KB docs covering all 12 required topics, each 2–5 sentences
+- [x] Two chunking strategies in two separate ChromaDB collections via `upsert()`, both sensible on a sample query
+- [x] Threshold calibrated from ≥ 3 in-scope + ≥ 2 out-of-scope measurements, stated in the README
+- [x] Grounded generation on ≥ 5 in-scope queries + 1 out-of-scope query triggering the fallback
+- [x] P/R for both collections on the same queries with per-query arithmetic and a numbers-cited recommendation
 
 **Part 2**
-- [ ] `check_support_ticket_status` returns status, resolution_time_hours and a designed escalation_score; formula and threshold justified with P80
-- [ ] Crew with 3 agents; `rag_lookup` and the ticket tool each shown invoked via `.kickoff()` on different queries
-- [ ] Multi-turn memory transcript + a separate fresh-session transcript showing it's absent
-- [ ] Every crew response validated against `SupportResponse` in code
-- [ ] PII masking, injection detection and the groundedness refusal each shown firing
+- [x] `check_support_ticket_status` returns status, resolution_time_hours and a designed escalation_score; formula and threshold justified with P80
+- [x] Crew with 3 agents; `rag_lookup` and the ticket tool each shown invoked via `.kickoff()` on different queries
+- [x] Multi-turn memory transcript + a separate fresh-session transcript showing it's absent
+- [x] Every crew response validated against `SupportResponse` in code
+- [x] PII masking, injection detection and the groundedness refusal each shown firing
 
 **Part 3**
-- [ ] `/ask` and `/add-document` with Pydantic models; `/ws/chat` survives a client disconnect
-- [ ] One JSONL log entry per request with trace_id and timings; no raw phone number on disk
-- [ ] 15 queries, every KB topic covered + ≥ 2 edge/out-of-scope; 4 scores each + 4 averages under MOCK_LLM
+- [x] `/ask` and `/add-document` with Pydantic models; `/ws/chat` survives a client disconnect
+- [x] One JSONL log entry per request with trace_id and timings; no raw phone number on disk
+- [x] 15 queries, every KB topic covered + ≥ 2 edge/out-of-scope; 4 scores each + 4 averages under MOCK_LLM
 
 **Part 4**
-- [ ] Autogen RoundRobinGroupChat (`max_turns=2`, `custom_message_types`), editor with `output_content_type=ReviewVerdict`; one approve-unchanged and one revise case
-- [ ] Only the Lookup Agent can bind the ticket tool, with the guard demonstrated and explained; Medium risk classification justified
-- [ ] Per-request budget rejects an oversized request
-- [ ] Cache hit on a repeated query with before/after counter + timing evidence
+- [x] Autogen RoundRobinGroupChat (`max_turns=2`, `custom_message_types`), editor with `output_content_type=ReviewVerdict`; one approve-unchanged and one revise case
+- [x] Only the Lookup Agent can bind the ticket tool, with the guard demonstrated and explained; Medium risk classification justified
+- [x] Per-request budget rejects an oversized request
+- [x] Cache hit on a repeated query with before/after counter + timing evidence
 
 **Submission**
-- [ ] One public GitHub repo; README top line states the track; everything runs under MOCK_LLM with zero keys; telemetry-disabled confirmation present
+- [x] One public GitHub repo; README top line states the track; everything runs under MOCK_LLM with zero keys; telemetry-disabled confirmation present
